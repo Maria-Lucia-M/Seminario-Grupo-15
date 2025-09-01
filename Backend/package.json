@@ -1,0 +1,21 @@
+{
+  "name": "sara",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "devDependencies": {
+    "@types/express": "5.0.3",
+    "@types/node": "24.3.0",
+    "express": "5.1.0",
+    "tsc-watch": "6.3.1",
+    "typescript": "5.9.2"
+  },
+  "scripts": {
+    "build": "tsc -p ./tsconfig.json",
+    "start:dev": "tsc-watch --noClear -p ./tsconfig.json --onSuccess \"node ./dist/app.js\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
