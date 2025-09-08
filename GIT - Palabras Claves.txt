@@ -1,0 +1,59 @@
+GIT - Learning
+
+    Git se divide en tres áreas principales:
+        Árbol de Trabajo (Working directory): 
+            Es el directorio donde se encuentran los archivos del proyecto y donde se realizan los cambios
+        Área de Preparación (Staginig area):
+            Es una zona intermedia donde se guardan los archivos que se han modificado y que se quieren incluir en el siguiente commit
+        Repositorio Local (Local repository):
+            Es la base de datos donde se guardan las versiones anteriores de los archivos y donde se almacenan los commits
+    
+    Comandos de Git
+
+        # ❇️ Inicialización
+            git init                        # Inicializa un nuevo repositorio Git
+            git clone <repo-url>            # Clona un repositorio desde una url
+
+        # 🛠️ Uso diario
+            git status                      # Muestra el estado de los cambios
+            git add <archivo>               # Agrega los cambios al área de preparación 
+            git rm --cached <archivo>       # Eliminar archivo del área de preparación
+            git commit -m "Mensaje" -a      # Confirma los cambios y los sube al Repositorio
+            git commit -a                   # Realizar cambios de forma directa sin necesidad de usar "add"
+        
+        # 🌳 Manejo de Ramas
+            git breach                      # Listar Ramas
+            git breach <nombre-rama>        # Crear rama 
+            git switch <nombre-rama>        # Mover a rama
+            git breach -d <nombre-rama>     # Eliminar rama
+        
+        # 🤝 Integración y colaboración
+            git merge <nombre-rama>         # Fusiona la rama
+            git remote add <nombre> <url>   # Añade un repositorio remoto 
+            git push <remoto> <rama>        # Envía los cambios a un repositorio remoto
+            git pull <remoto> <rama>        # Obtiene los cambios de un repositorio remoto
+        
+        # ⏪ Recuperación y Limpieza       
+            git checkout                    # Vuelve al ultimo commit realizado (Antes del área de Staginig)    
+            git fetch                       # Recupera los cambios sin fusionar
+            git reset --hard HEAD           # Desecha todos los cambios locales
+            git revert <hash-commit>        # Revierte los cambios de un commit
+
+        # 🧑🏽‍💻 Avanzados y Útiles
+            git diff <a> <b>                # Compara dos commits, ramas o archivos
+            git show <hash>                 # Muestra detalles de un commit
+            git stash                       # Guarda cambios temporales y limpia el Working Tree 
+            git stash pop                   # Recupera los cambios guardados del stash 
+            git cherry-pick <hash>          # Aplica un commit especifico en la rama actual
+            git rebase <base>               # Reaplica commits sobre otra base
+
+    Comandos Basicos
+
+        mkdir <carpeta>                     # Crear una carpeta
+        rmdir <carpeta>                     # Eliminar una carpeta
+        cd <carpeta>                        # Moverte hacia una carpeta
+        ls                                  # Listar archivos
+        rm                                  # Eliminar archivo
+        clear                               # Limpiar terminal
+
+AGUANTE MIDU.
