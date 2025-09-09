@@ -1,9 +1,16 @@
-import express from "express";
+import express from 'express';
+import mongoose from 'mongoose';
+import dotenv from "dotenv";
 const app = express();
-app.use('/', (req, res) => {
-    res.send("Holaa!!!");
-});
+app.use(express.json());
+const MONGO_URI = process.env.MONGO_URI;
+dotenv.config();
+mongoose.connect(MONGO_URI)
+    .then(() => console.log('Conectado a MongoDB'))
+    .catch((err) => console.error('Error de conexión:', err))
+    .finally(() => console.log('Intento de conexión finalizado'));
+// ...rutas y lógica...
 app.listen(3000, () => {
-    console.log('Server running on http://localhost:3000/');
+    console.log('Servidor iniciado en puerto 3000');
 });
 //# sourceMappingURL=app.js.map
