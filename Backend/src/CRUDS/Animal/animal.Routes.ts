@@ -1,12 +1,12 @@
 import { Router } from 'express';
-import { PersonaController } from './ani.controler';
+import { AnimalController } from './ani.controler';
 
 const router = Router();
-const personaController = new PersonaController();
+const animalController = new AnimalController();
 
 export function setRoutes(app: Router) {
-    app.post('/personas', personaController.createPersona.bind(personaController));
-    app.get('/personas/:dni', personaController.getPersona.bind(personaController));
-    app.put('/personas/:dni', personaController.updatePersona.bind(personaController));
-    app.delete('/personas/:dni', personaController.deletePersona.bind(personaController));
+    app.post('/animales', animalController.createAnimal.bind(animalController));
+    app.get('/animales/:nro', animalController.getAnimal.bind(animalController));
+    app.put('/animales/:nro', animalController.updateAnimal.bind(animalController));
+    app.delete('/animales/:nro', animalController.deleteAnimal.bind(animalController));
 }
