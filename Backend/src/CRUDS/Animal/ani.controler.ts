@@ -1,46 +1,48 @@
 import { Request, Response } from 'express';
-import { Persona } from './ani.entity';
+import { Animal } from './ani.entity';
 
-export class PersonaController {
-    private personas: Persona[] = [];
+export class AnimalController {
+    private animales: Animal[] = [];
 
-    public createPersona(req: Request, res: Response): void {
-        const { dni, nombre, apellido, mail, contraseña, telefono } = req.body;
-        const newPersona = new Persona(dni, nombre, apellido, mail, contraseña, telefono);
-        this.personas.push(newPersona);
-        res.status(201).json(newPersona);
+    public createAnimal(req: Request, res: Response): void {
+        const { nro, especie, raza, edad_estimada, fecha_ingreso, imagen, video} = req.body;
+        const fecha_defuncion = null;
+        const estado = { disponible: false, no_disponible: true };
+        const newAnimal = new Animal(nro, especie, raza, edad_estimada, fecha_ingreso, fecha_defuncion, estado, imagen, video);
+        this.animales.push(newAnimal);
+        res.status(201).json(newAnimal);
     }
 
-    public getPersona(req: Request, res: Response): void {
-        const { dni } = req.params;
-        const persona = this.personas.find(p => p.dni === dni);
-        if (persona) {
-            res.status(200).json(persona);
+    public getAnimal(req: Request, res: Response): void {
+        const nro = BigInt(req.params.nro);
+        const animal = this.animales.find(n => n.nro === nro);
+        if (animal) {
+            res.status(200).json(animal);
         } else {
-            res.status(404).json({ message: 'Persona not found' });
+            res.status(404).json({ message: 'Animal no encontrado' });
         }
     }
 
-    public updatePersona(req: Request, res: Response): void {
-        const { dni } = req.params;
-        const index = this.personas.findIndex(p => p.dni === dni);
+    public updateAnimal(req: Request, res: Response): void {
+        const nro = BigInt(req.params.nro);
+        const index = this.animales.findIndex(n => n.nro === nro);
         if (index !== -1) {
-            const { nombre, apellido, mail, contraseña, telefono } = req.body;
-            this.personas[index] = { dni, nombre, apellido, mail, contraseña, telefono };
-            res.status(200).json(this.personas[index]);
+            const { especie, raza, edad_estimada, fecha_ingreso, fecha_defuncion, estado, imagen, video } = req.body;
+            this.animales[index] = { nro, especie, raza, edad_estimada, fecha_ingreso, fecha_defuncion, estado, imagen, video };
+            res.status(200).json(this.animales[index]);
         } else {
-            res.status(404).json({ message: 'Persona not found' });
+            res.status(404).json({ message: 'Animal no encontrado' });
         }
     }
 
-    public deletePersona(req: Request, res: Response): void {
-        const { dni } = req.params;
-        const index = this.personas.findIndex(p => p.dni === dni);
+    public deleteAnimal(req: Request, res: Response): void {
+        const nro = BigInt(req.params.nro);
+        const index = this.animales.findIndex(n => n.nro === nro);
         if (index !== -1) {
-            this.personas.splice(index, 1);
+            this.animales.splice(index, 1);
             res.status(204).send();
         } else {
-            res.status(404).json({ message: 'Persona not found' });
+            res.status(404).json({ message: 'Animal no encontrado' });
         }
     }
 }
