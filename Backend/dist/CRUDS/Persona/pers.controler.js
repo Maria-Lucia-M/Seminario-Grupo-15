@@ -16,7 +16,7 @@ export class PersonaController {
             res.status(200).json(persona);
         }
         else {
-            res.status(404).json({ message: 'Persona not found' });
+            res.status(404).json({ message: 'Persona no encontrada' });
         }
     }
     updatePersona(req, res) {
@@ -28,7 +28,7 @@ export class PersonaController {
             res.status(200).json(this.personas[index]);
         }
         else {
-            res.status(404).json({ message: 'Persona not found' });
+            res.status(404).json({ message: 'Persona no encontrada' });
         }
     }
     deletePersona(req, res) {
@@ -39,7 +39,7 @@ export class PersonaController {
             res.status(204).send();
         }
         else {
-            res.status(404).json({ message: 'Persona not found' });
+            res.status(404).json({ message: 'Persona no encontrada' });
         }
     }
 }
