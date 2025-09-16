@@ -1,4 +1,3 @@
-import { Router } from 'express';
 import { AnimalController } from './ani.controler';
 const router = Router();
 const animalController = new AnimalController();
