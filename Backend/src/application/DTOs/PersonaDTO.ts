@@ -1,14 +1,14 @@
-interface Veterinario {
+export interface Veterinario {
     matricula: string;
     año_experiencia:string;
 };
 
-interface Adoptante {
+export interface Adoptante {
     estado:'Apto' | 'No apto';
     domicilio: string;
 };
 
-interface Colaborador {
+export interface Colaborador {
     id_colaborador: number;
 };
 
