@@ -1,4 +1,4 @@
-export interface AdopcionDTO {
+export interface Adopcion {
     nro_adopcion: number;
     nro_animal: number;
     dni_adoptante: number;
@@ -6,4 +6,4 @@ export interface AdopcionDTO {
     fecha_retiro: Date | null;
     motivos_retiro: string;
     evidencia_maltrato: string | null;
-};
+}
