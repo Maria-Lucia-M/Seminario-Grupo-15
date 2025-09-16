@@ -1,8 +1,11 @@
-export interface Persona {
-    dni: string;
-    nombre: string;
-    apellido: string;
-    mail: string;
-    contraseña: string;
-    telefono: string;
+export interface Animal {
+    nro: bigint;
+    especie: string;
+    raza: string;
+    edad_estimada: bigint;
+    fecha_ingreso: Date;
+    fecha_defuncion: Date | null;
+    estado: { disponible: boolean; no_disponible: boolean };
+    imagen: string[];
+    video: string[]; 
 }

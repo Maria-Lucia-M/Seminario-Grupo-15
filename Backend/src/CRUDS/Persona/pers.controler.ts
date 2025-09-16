@@ -17,7 +17,7 @@ export class PersonaController {
         if (persona) {
             res.status(200).json(persona);
         } else {
-            res.status(404).json({ message: 'Persona not found' });
+            res.status(404).json({ message: 'Persona no encontrada' });
         }
     }
 
@@ -49,7 +49,7 @@ export class PersonaController {
             
             res.status(200).json(personaAActualizar);
         } else {
-            res.status(404).json({ message: 'Persona not found' });
+            res.status(404).json({ message: 'Persona no encontrada' });
         }
     }
     
@@ -60,7 +60,7 @@ export class PersonaController {
             this.personas.splice(index, 1);
             res.status(204).send();
         } else {
-            res.status(404).json({ message: 'Persona not found' });
+            res.status(404).json({ message: 'Persona no encontrada' });
         }
     }
 }
