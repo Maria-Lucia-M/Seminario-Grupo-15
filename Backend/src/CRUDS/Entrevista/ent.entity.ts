@@ -1,6 +1,3 @@
-import { Adoptante } from '../../application/DTOs/PersonaDTO';
-import { Colaborador } from '../../application/DTOs/PersonaDTO';
-
 export class Entrevista {
     id_entrevista: bigint;
     fecha: Date;
