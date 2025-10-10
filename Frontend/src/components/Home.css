@@ -1,0 +1,72 @@
+/* Asegura que el fondo y el root ocupen toda la pantalla */
+html, body, #root {
+    height: 100%;
+    margin: 0;
+    background-color: #f4f6f8;
+    font-family: 'Segoe UI', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Contenedor principal centrado */
+.home-container {
+    width: 100%;
+    max-width: 1000px;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Tarjeta central con sombra y bordes redondeados */
+.home-card {
+    background-color: #ffffff;
+    padding: 3rem 2rem;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 100%;
+    max-width: 600px;
+}
+
+/* Título y subtítulo */
+.home-card h1 {
+    margin-bottom: 0.5rem;
+    font-size: 2rem;
+    color: #2c3e50;
+}
+
+.home-card p {
+    margin-bottom: 2rem;
+    color: #555;
+}
+
+/* Contenedor de botones */
+.cuu-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* Botones uniformes */
+.cuu-button {
+    background-color: #1976d2;
+    color: white;
+    padding: 0.75rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    text-align: center;
+}
+
+.cuu-button:hover {
+    background-color: #1565c0;
+}
+@media (min-width: 1024px) {
+    .home-card {
+        padding: 4rem;
+    }
+}
