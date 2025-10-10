@@ -1,4 +1,4 @@
-export default class Vacuna {
+export class Vacuna {
     constructor(nro_vacuna, fecha_vencimiento, droga, stock, fecha_ingreso) {
         this.nro_vacuna = nro_vacuna;
         this.fecha_vencimiento = fecha_vencimiento;

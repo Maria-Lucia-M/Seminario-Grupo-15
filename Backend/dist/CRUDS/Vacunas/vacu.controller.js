@@ -1,4 +1,4 @@
-import Vacuna from './vacu.entity';
+import { Vacuna } from './vacu.entity';
 export class VacunaController {
     constructor() {
         this.vacunas = [];

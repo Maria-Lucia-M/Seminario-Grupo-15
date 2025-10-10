@@ -1,4 +1,4 @@
-export default class Vacuna {
+export  class Vacuna {
     nro_vacuna: number;
     fecha_vencimiento: Date;
     droga: string;

@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import Vacuna from './vacu.entity';
+import { Vacuna } from './vacu.entity';
 
 export class VacunaController {
     private vacunas: Vacuna[] = [];
