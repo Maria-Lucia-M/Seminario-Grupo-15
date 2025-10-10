@@ -22,10 +22,10 @@ GIT - Learning
             git commit -a                   # Realizar cambios de forma directa sin necesidad de usar "add"
         
         # 🌳 Manejo de Ramas
-            git breach                      # Listar Ramas
-            git breach <nombre-rama>        # Crear rama 
+            git branch                      # Listar Ramas
+            git branch <nombre-rama>        # Crear rama 
             git switch <nombre-rama>        # Mover a rama
-            git breach -d <nombre-rama>     # Eliminar rama
+            git branch -d <nombre-rama>     # Eliminar rama
         
         # 🤝 Integración y colaboración
             git merge <nombre-rama>         # Fusiona la rama
