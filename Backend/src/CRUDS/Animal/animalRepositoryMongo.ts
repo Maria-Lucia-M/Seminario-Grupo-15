@@ -1,12 +1,13 @@
 import { AnimalDTO } from '../../application/DTOs/AnimalDTO';
 import { AnimalModel } from './animal.js';
 import { mapearAnimal } from './mapearAnimal.js';
-import { Especie } from '../../application/DTOs/AnimalDTO.js';
 
-type Estado = 'Disponible' | 'No disponible';
+type Especie = 'Perro' | 'Gato';
+
+type Estado = 'Apto' | 'No apto' | 'En adopcion' | 'Adoptado';
 
 const especieValida: Especie[] = ['Perro', 'Gato'];
-const estadoValido: Estado[] = ['Disponible', 'No disponible'];
+const estadoValido: Estado[] = ['Apto', 'No apto', 'En adopcion', 'Adoptado'];
 
 export class AnimalRepositoryMongo {
     async registrar(dto: AnimalDTO): Promise<AnimalDTO> {
@@ -29,8 +30,8 @@ export class AnimalRepositoryMongo {
             fecha_ingreso: guardado.fecha_ingreso,
             fecha_defuncion: guardado.fecha_defuncion,
             estado: guardado.estado as Estado,
-            imagen: guardado.imagen,
-            video: guardado.video
+            imagen: Array.isArray(guardado.imagen) ? guardado.imagen.join(',') : guardado.imagen,
+            video: Array.isArray(guardado.video) ? guardado.video.join(',') : guardado.video
         };
     };
 

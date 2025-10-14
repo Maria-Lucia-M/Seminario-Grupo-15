@@ -1,22 +1,22 @@
 export class Animal {
     nro: bigint;
-    especie: string;
+    especie: {perro: boolean; gato: boolean};
     raza: string;
     edad_estimada: bigint;
     fecha_ingreso: Date;
     fecha_defuncion: Date | null;
-    estado: { apto: boolean; no_apto: boolean };
+    estado: { apto: boolean; no_apto: boolean; en_adopcion: boolean; adoptado: boolean };
     imagen: string[];
     video: string[]; 
 
     constructor(
         nro: bigint,
-        especie: string,
+        especie: {perro: boolean; gato: boolean},
         raza: string,
         edad_estimada: bigint,
         fecha_ingreso: Date,
         fecha_defuncion: Date | null,
-        estado: { apto: boolean; no_apto: boolean },
+        estado: { apto: boolean; no_apto: boolean; en_adopcion: boolean; adoptado: boolean },
         imagen: string[],
         video: string[]
     ) {

@@ -1,7 +1,7 @@
 import { AnimalModel } from './animal.js';
 import { mapearAnimal } from './mapearAnimal.js';
 const especieValida = ['Perro', 'Gato'];
-const estadoValido = ['Disponible', 'No disponible'];
+const estadoValido = ['Apto', 'No apto', 'En adopcion', 'Adoptado'];
 export class AnimalRepositoryMongo {
     async registrar(dto) {
         if (!especieValida.includes(dto.especie)) {
@@ -22,8 +22,8 @@ export class AnimalRepositoryMongo {
             fecha_ingreso: guardado.fecha_ingreso,
             fecha_defuncion: guardado.fecha_defuncion,
             estado: guardado.estado,
-            imagen: guardado.imagen,
-            video: guardado.video
+            imagen: Array.isArray(guardado.imagen) ? guardado.imagen.join(',') : guardado.imagen,
+            video: Array.isArray(guardado.video) ? guardado.video.join(',') : guardado.video
         };
     }
     ;

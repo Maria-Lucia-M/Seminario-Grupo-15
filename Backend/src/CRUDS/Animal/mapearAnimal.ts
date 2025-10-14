@@ -1,6 +1,8 @@
-import { AnimalDTO, Especie } from '../../application/DTOs/AnimalDTO';
+import { AnimalDTO} from '../../application/DTOs/AnimalDTO';
 
-type Estado = 'Disponible' | 'No disponible';
+type Especie = 'Perro' | 'Gato';
+
+type Estado = 'Apto' | 'No apto' | 'En adopcion' | 'Adoptado';
 
 export function mapearAnimal(doc: any): AnimalDTO {
     return {

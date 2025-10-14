@@ -1,5 +1,3 @@
-type Raza = 'Dogo' | 'Fila Du Brasil' | 'Pancho salchicha' | 'Cusco' | 'Otros';
-
 type Especie = 'Perro' | 'Gato';
 
 type Estado = 'Apto' | 'No apto' | 'En adopcion' | 'Adoptado';

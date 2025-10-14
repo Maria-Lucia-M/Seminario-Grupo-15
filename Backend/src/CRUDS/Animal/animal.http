@@ -15,7 +15,7 @@ Content-Type: application/json
     "edad_estimada": 3,
     "fecha_ingreso": "2023-10-01T00:00:00.000Z",
     "fecha_defuncion": null,
-    "estado": "Disponible",
+    "estado": "Apto",
     "imagen": ["https://ejemplo.com/perro1.jpg"],
     "video": ["https://ejemplo.com/perro1.mp4"]
 }
@@ -27,7 +27,7 @@ Content-Type: application/json
 {
     "raza": "Labrador Retriever",
     "edad_estimada": 4,
-    "estado": "No disponible"
+    "estado": "No Apto"
 }
 
 ### Eliminar un animal

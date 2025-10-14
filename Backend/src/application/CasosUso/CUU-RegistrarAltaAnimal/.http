@@ -5,5 +5,5 @@ Content-Type: application/json
     "nro_adopcion": 1,
     "fecha_seguimiento": "2024-10-10",
     "entorno": "Ambiente familiar adecuado",
-    "estado_animal": "No adoptado"
+    "estado_animal": "No apto"
 }

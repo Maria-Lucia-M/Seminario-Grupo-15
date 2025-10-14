@@ -51,7 +51,7 @@ export const registrarAnimalController = async (req, res) => {
             return;
         }
         ;
-        res.status(201).json({ message: "Animal creado con exito", data: resultado });
+        res.status(201).json({ message: "Animal registrado con exito", data: resultado });
         return;
     }
     catch (error) {
