@@ -6,7 +6,7 @@ export class RegistrarAlta {
     async ejecutar(dto) {
         const errores = [];
         // Validar datos requeridos
-        if (!dto.nro_animal ||
+        if (!dto.nro ||
             !dto.especie ||
             !dto.raza ||
             !dto.edad_estimada ||
