@@ -1,11 +1,9 @@
 import { Router } from 'express';
-import { AnimalController } from './ani.controler';
-const router = Router();
-const animalController = new AnimalController();
-export function setRoutes(app) {
-    app.post('/animales', animalController.createAnimal.bind(animalController));
-    app.get('/animales/:nro', animalController.getAnimal.bind(animalController));
-    app.put('/animales/:nro', animalController.updateAnimal.bind(animalController));
-    app.delete('/animales/:nro', animalController.deleteAnimal.bind(animalController));
-}
+import { findAllAnimales, getOneAnimal, registrarAnimalController, actualizarAnimal, eliminarAnimal } from './animal.controler.js';
+export const animalRoutes = Router();
+animalRoutes.get('/animales', findAllAnimales);
+animalRoutes.get('/animales/:nro', getOneAnimal);
+animalRoutes.post('/animales', registrarAnimalController);
+animalRoutes.put('/animales/:nro', actualizarAnimal);
+animalRoutes.delete('/animales/:nro', eliminarAnimal);
 //# sourceMappingURL=animal.Routes.js.map
