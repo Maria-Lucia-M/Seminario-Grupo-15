@@ -1,37 +1,16 @@
-import { Request, Response } from "express";
-import { Vacuna } from "../../../CRUDS/Vacunas/vacu.entity.js";
-import { FichaMedicaController } from "../../../CRUDS/Ficha Medica/fmed.controler.js";
-import { VacunaController } from "../../../CRUDS/Vacunas/vacu.controller.js";
+import { FichaMedicaDTO } from "../../DTOs/FichaMedicaDTO.js";
+import { FichaMedicaRepository } from "../../interfaces/FichaMedicaRepository.js";
 
-const vacunas: Vacuna[] = [];
+export class RegistrarColocacionVacunas {
+    constructor(private readonly repo: FichaMedicaRepository){};
 
-export function registrarColocacionVacunas(req: Request, res: Response): void {
-    const numerosVacunas: number[] = req.body.numerosVacunas;
-    const vacunasNecesarias = vacunas.filter(v => numerosVacunas.includes(v.nro_vacuna));
-
-    const vacunasSinStock = vacunasNecesarias.filter(v => v.stock <= 0);
-    const vacunasVencidas = vacunasNecesarias.filter(v => v.fecha_vencimiento < new Date());
-
-    if (vacunasSinStock.length > 0 || vacunasVencidas.length > 0) {
-            res.status(400).json({
-            message: 'Hay vacunas sin stock y/o vencidas.',
-            sinStock: vacunasSinStock.map(v => v.droga),
-            vencidas: vacunasVencidas.map(v => v.droga)})
-        return;
-    }
-
-    const vacunaController = new VacunaController();
-    vacunasNecesarias.forEach(v => {
-        v.stock -= 1;
-        const mockRequest = {
-            params: { nro_vacuna: v.nro_vacuna },
-            body: v
-        } as unknown as Request;
-        vacunaController.updateVacuna(mockRequest, {} as Response);
-    });
-
-    req.body.nro_vacunas = numerosVacunas;
-    const fichaMedicaController = new FichaMedicaController();
-    fichaMedicaController.createFicha(req, res);
-
-}
+    async ejecutar(dto: FichaMedicaDTO): Promise<FichaMedicaDTO | string[]>{
+        const errores: string[] = [];
+        if (!dto.nro_ficha || !dto.nro_animal || !dto.matricula || !dto.nro_vacunas || !dto.observaciones || !dto.fecha) {
+            errores.push("Datos incompletos para registrar ficha medica");
+            return errores;
+        };
+        const fichaMedica = await this.repo.registrar(dto);
+        return fichaMedica
+    };
+};

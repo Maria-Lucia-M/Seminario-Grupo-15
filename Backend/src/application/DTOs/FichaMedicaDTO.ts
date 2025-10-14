@@ -1,9 +1,8 @@
-export interface FichaMedica {
+export interface FichaMedicaDTO {
     nro_ficha:number;
     nro_animal:number;
-    matricula: string;
-    dni:number;
-    nro_vacuna:number;
+    matricula:string;
+    nro_vacunas:number[];
     observaciones:string;
     fecha:Date;
 } ;

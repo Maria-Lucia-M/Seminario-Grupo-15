@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { Animal } from "../../../CRUDS/Animal/ani.entity";
 import { Vacuna }from "../../../CRUDS/Vacunas/vacu.entity";
-import { FichaMedica } from "../../../CRUDS/Ficha Medica/fmed.entity";
+import { FichaMedica } from "../../../CRUDS/Ficha Medica/fmed.model";
 
 // Simulación de datos en memoria
 const animales: Animal[] = [];

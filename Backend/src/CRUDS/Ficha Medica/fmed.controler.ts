@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { FichaMedica } from "./fmed.entity";
+import { FichaMedica } from "./fmed.model";
 
 export class FichaMedicaController {
     private fichas: FichaMedica[] = [];
