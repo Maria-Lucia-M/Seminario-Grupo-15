@@ -1,10 +1,8 @@
-type Raza = {
-    raza: 'Dogo' | 'Fila Du Brasil' | 'Pancho salchicha' | 'Cusco';
-};
+type Raza = 'Dogo' | 'Fila Du Brasil' | 'Pancho salchicha' | 'Cusco' | 'Otros';
 
 type Especie = 'Perro' | 'Gato';
 
-type Estado = 'Disponible' | 'No disponible';
+type Estado = 'Apto' | 'No apto' | 'En adopcion' | 'Adoptado';
 
 export interface AnimalDTO {
     nro_animal: number;
@@ -12,8 +10,8 @@ export interface AnimalDTO {
     raza: Raza;
     edad_estimada: number;
     fecha_ingreso: Date;
-    fecha_defuncion?: Date | null;
+    fecha_defuncion: Date | null;
     estado: Estado;
     imagen: string;
-    video: string;
+    video: string | null;
 };

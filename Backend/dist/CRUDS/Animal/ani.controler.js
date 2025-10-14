@@ -6,7 +6,7 @@ export class AnimalController {
     createAnimal(req, res) {
         const { nro, especie, raza, edad_estimada, fecha_ingreso, imagen, video } = req.body;
         const fecha_defuncion = null;
-        const estado = { disponible: false, no_disponible: true };
+        const estado = { apto: false, no_apto: true };
         const newAnimal = new Animal(nro, especie, raza, edad_estimada, fecha_ingreso, fecha_defuncion, estado, imagen, video);
         this.animales.push(newAnimal);
         res.status(201).json(newAnimal);

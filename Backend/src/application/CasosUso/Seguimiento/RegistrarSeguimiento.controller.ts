@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { RegistrarSeguimiento } from "./RegistrarSeguimiento.js";
-import { SeguimientoRepositoryMongo } from "../Seguimiento/SeguimientoRepositoryMongo.js";
+import { RegistrarSeguimiento } from "../../casosUso/Seguimiento/RegistrarSeguimiento.js";
+import { SeguimientoRepositoryMongo } from "../../casosUso/Seguimiento/SeguimientoRepositoryMongo.js";
 
 export const RegistrarSeguimentoController = async (req: Request, res: Response):Promise<void> => {
     try{
