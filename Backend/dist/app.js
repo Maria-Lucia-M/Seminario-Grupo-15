@@ -1,6 +1,8 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from "dotenv";
+//Rutas CRUDs:
+import { animalRoutes } from './CRUDS/Animal/animal.Routes.js';
 //Rutas del sistema:
 import { RegistrarSeguimientoRoutes } from './application/CasosUso/Seguimiento/RegistrarSeguimiento.routes.js';
 dotenv.config();
@@ -15,4 +17,6 @@ app.listen(3000, () => {
     console.log('Servidor iniciado en puerto 3000');
 });
 app.use('/api', RegistrarSeguimientoRoutes);
+app.use('/api', animalRoutes);
+export default app;
 //# sourceMappingURL=app.js.map

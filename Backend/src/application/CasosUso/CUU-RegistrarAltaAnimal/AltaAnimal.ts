@@ -1,7 +1,7 @@
 import { Schema, model } from 'mongoose';
 
 const altaSchema = new Schema({
-    nro_animal: { type: Number, ref: 'Numero Animal', required: true },
+    nro: { type: Number, ref: 'Numero Animal', required: true },
     especie: { type: String, enum: ['Perro', 'Gato'], required: true },
     raza: { type: String, enum: ['Dogo', 'Fila Du Brasil', 'Pancho salchicha', 'Cusco', 'Otros'], required: true },
     edad_estimada: { type: Number, required: true },

@@ -8,7 +8,7 @@ export class RegistrarAlta {
         const errores: string[] = [];
         // Validar datos requeridos
         if (
-            !dto.nro_animal ||
+            !dto.nro ||
             !dto.especie ||
             !dto.raza ||
             !dto.edad_estimada ||

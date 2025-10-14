@@ -1,0 +1,34 @@
+### Obtener todos los animales
+GET http://localhost:3000/api/animales
+
+### Obtener un animal por número
+GET http://localhost:3000/api/animales/1
+
+### Registrar un nuevo animal
+POST http://localhost:3000/api/animales
+Content-Type: application/json
+
+{
+    "nro": 1,
+    "especie": "Perro",
+    "raza": "Labrador",
+    "edad_estimada": 3,
+    "fecha_ingreso": "2023-10-01T00:00:00.000Z",
+    "fecha_defuncion": null,
+    "estado": "Disponible",
+    "imagen": ["https://ejemplo.com/perro1.jpg"],
+    "video": ["https://ejemplo.com/perro1.mp4"]
+}
+
+### Actualizar un animal existente
+PUT http://localhost:3000/api/animales/1
+Content-Type: application/json
+
+{
+    "raza": "Labrador Retriever",
+    "edad_estimada": 4,
+    "estado": "No disponible"
+}
+
+### Eliminar un animal
+DELETE http://localhost:3000/api/animales/1
