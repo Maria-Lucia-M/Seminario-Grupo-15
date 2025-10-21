@@ -10,7 +10,7 @@ const Home = () => {
 
                 <div className="cuu-buttons">
                 <Link to="/cuu/registro-animal" className="cuu-button">Registro alta de animal</Link>
-                <Link to="/cuu/rescate" className="cuu-button">Registrar rescate animal</Link>
+                <Link to="/valida-rescatista" className="cuu-button">Registrar rescate animal</Link>
                 <Link to="/cuu/lista-negra" className="cuu-button">Registrar lista negra</Link>
                 <Link to="/cuu/colocacion-vacunas" className="cuu-button">Registrar colocación de vacunas</Link>
                 <Link to="/cuu/alta-entrevista" className="cuu-button">Alta de entrevista</Link>

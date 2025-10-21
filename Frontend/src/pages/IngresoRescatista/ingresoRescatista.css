@@ -1,0 +1,70 @@
+.ingreso-rescatista-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f5f5f5;
+}
+.ingreso-rescatista-form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.089);
+    width: 400px;
+}
+.ingreso-rescatista-form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.ingreso-rescatista-form .form-group {
+    margin-bottom: 15px;
+}
+.ingreso-rescatista-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+.ingreso-rescatista-form input {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+}
+.ingreso-rescatista-form .form-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+.boton-ingresar {
+    background-color: #3176dd;
+    color: #fff;
+    padding: 10px 16px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+}
+.boton-ingresar:hover {
+    background-color: #255bb5;
+}
+.ingreso-rescatista-error {
+    color: red;
+    margin-top: 10px;
+    text-align: center;
+}
+.ingreso-rescatista-success {
+    color: green;
+    margin-top: 10px;
+    text-align: center;
+}
+.ingreso-rescatista-link {
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    color: #3176dd;
+    text-decoration: none;
+}
+.ingreso-rescatista-link:hover {
+    text-decoration: underline;
+}
