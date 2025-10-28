@@ -4,9 +4,10 @@ import { RescateController } from './res.controller';
 const router = Router();
 const rescateController = new RescateController();
 
-export function setRoutes(app: Router) {
-    app.post('/rescates', rescateController.createRescate.bind(rescateController));
-    app.get('/rescates/:nro_animal', rescateController.getRescate.bind(rescateController));
-    app.put('/rescates/:nro_animal', rescateController.updateRescate.bind(rescateController));
-    app.delete('/rescates/:nro_animal', rescateController.deleteRescate.bind(rescateController));
-}
+router.post('/', rescateController.createRescate);
+router.get('/', rescateController.getAll);
+router.get('/:_id', rescateController.getRescate);
+router.put('/:_id', rescateController.updateRescate);
+router.delete('/:_id', rescateController.deleteRescate);
+
+export default router;

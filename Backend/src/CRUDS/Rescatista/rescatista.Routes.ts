@@ -4,9 +4,10 @@ import { RescatistaController } from "./res.controller";
 const router = Router();
 const rescatistaController = new RescatistaController();
 
-export function setRoutes(app: Router) {
-  app.post('/rescatistas', rescatistaController.createRescatista.bind(rescatistaController));
-  app.get('/rescatistas/:dni', rescatistaController.getRescatista.bind(rescatistaController));
-  app.put('/rescatistas/:dni', rescatistaController.updateRescatista.bind(rescatistaController));
-  app.delete('/rescatistas/:dni', rescatistaController.deleteRescatista.bind(rescatistaController));
-}
+router.post('/', rescatistaController.createRescatista);
+router.get('/', rescatistaController.getAll);
+router.get('/:_id', rescatistaController.getRescatista);
+router.put('/:_id', rescatistaController.updateRescatista);
+router.delete('/:_id', rescatistaController.deleteRescatista);
+
+export default router;

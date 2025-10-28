@@ -1,46 +1,73 @@
-import { Request, Response } from "express";
-import { Rescatista } from "./res.entity";
+import { Request, Response } from 'express';
+import { RegistrarRescatista } from './RegistrarRescatista';
+import { RescatistaRepositoryMongo } from './rescatistaRepositoryMongo';
 
 export class RescatistaController {
-  private rescatistas: Rescatista[] = [];
-
-  public createRescatista(req: Request, res: Response): void {
-    const { dni, nombre, apellido, telefono } = req.body;
-    const newRescatista = new Rescatista(dni, nombre, apellido, telefono);
-    this.rescatistas.push(newRescatista);
-    res.status(201).json(newRescatista);
-  }
-
-  public getRescatista(req: Request, res: Response): void {
-    const { dni } = req.params;
-    const rescatista = this.rescatistas.find(r => r.dni === dni);
-    if (rescatista) {
-      res.status(200).json(rescatista);
-    } else {
-      res.status(404).json({ message: 'Rescatista not found' });
+    private registrarRescatista: RegistrarRescatista;
+    constructor() {
+        const repo = new RescatistaRepositoryMongo();
+        this.registrarRescatista = new RegistrarRescatista(repo);
     }
-  }
-
-  public updateRescatista(req: Request, res: Response): void {
-    const { dni } = req.params;
-    const index = this.rescatistas.findIndex(r => r.dni === dni);
-    if (index !== -1) {
-      const { nombre, apellido, telefono } = req.body;
-      this.rescatistas[index] = { dni, nombre, apellido, telefono };
-      res.status(200).json(this.rescatistas[index]);
-    } else {
-      res.status(404).json({ message: 'Rescatista not found' });
+    public async createRescatista(req: Request, res: Response): Promise<void> {
+        try {
+            const resultado = await this.registrarRescatista.ejecutar(req.body);
+            if (Array.isArray(resultado)) {
+                res.status(400).json({ errors: resultado });
+            } else {
+                res.status(201).json({ message: 'Rescatista guardado correctamente!', rescatista: resultado });
+            }
+        } catch (error) {
+            res.status(500).json({ message: 'Error al crear el rescatista', error });
+        }
     }
-  }
 
-  public deleteRescatista(req: Request, res: Response): void {
-    const { dni } = req.params;
-    const index = this.rescatistas.findIndex(r => r.dni === dni);
-    if (index !== -1) {
-      this.rescatistas.splice(index, 1);
-      res.status(204).send();
-    } else {
-      res.status(404).json({ message: 'Rescatista not found' });
+    public async getAll(req: Request, res: Response): Promise<void> {
+        try {
+            const rescatistas = await this.registrarRescatista['repo'].getAll();
+            res.status(200).json(rescatistas);
+        } catch (error) {
+            res.status(500).json({ message: 'Error al obtener los rescatistas', error });
+        }
     }
-  }
+    public async getRescatista(req: Request, res: Response): Promise<void> {
+        try {
+            const dni = req.params._id;
+            const rescatista = await this.registrarRescatista['repo'].getById(dni);
+            if (rescatista) {
+                res.status(200).json(rescatista);
+            } else {
+                res.status(404).json({ message: 'Rescatista no encontrado' });
+            }
+        } catch (error) {
+            res.status(500).json({ message: 'Error al obtener el rescatista', error });
+        }
+    }
+
+    public async updateRescatista(req: Request, res: Response): Promise<void> {
+        try {
+            const dni = req.params._id;
+            const rescatistaActualizado = await this.registrarRescatista['repo'].update(dni, req.body);
+            if (rescatistaActualizado) {
+                res.status(200).json({ message: 'Rescatista actualizado correctamente!', rescatistaActualizado });
+            } else {
+                res.status(404).json({ message: 'Rescatista no encontrado' });
+            }
+        } catch (error) {
+            res.status(500).json({ message: 'Error al actualizar el rescatista', error });
+        }
+    }
+
+    public async deleteRescatista(req: Request, res: Response): Promise<void> {
+        try {
+            const dni = req.params._id;
+            const eliminado = await this.registrarRescatista['repo'].delete(dni);
+            if (eliminado) {
+                res.status(200).json({ message: 'Rescatista eliminado correctamente!' });
+            } else {
+                res.status(404).json({ message: 'Rescatista no encontrado' });
+            }
+        } catch (error) {
+            res.status(500).json({ message: 'Error al eliminar el rescatista', error });
+        }
+    }
 }
