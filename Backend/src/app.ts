@@ -6,7 +6,8 @@ import dotenv from "dotenv";
 import { animalRoutes } from './CRUDS/Animal/animal.Routes.js';
 
 //Rutas del sistema:
-import { RegistrarSeguimientoRoutes } from './application/casosuso/Seguimiento/RegistrarSeguimiento.routes.js';
+import { RegistrarSeguimientoRoutes } from './application/CasosUso/Seguimiento/RegistrarSeguimiento.routes.js';
+import { AltaEntrevistaRoutes } from './application/CasosUso/CUU5-AltaEntrevista/AltaEntrevista.routes.js';
 
 dotenv.config();
 const app = express();
@@ -24,5 +25,6 @@ app.listen(3000, () => {
 
 app.use('/api', RegistrarSeguimientoRoutes);
 app.use('/api', animalRoutes);
+app.use('/api', AltaEntrevistaRoutes);
 
 export default app;
