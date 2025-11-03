@@ -3,6 +3,6 @@ export interface FichaMedicaDTO {
     nro_animal:number;
     matricula:string;
     nro_vacunas:number[];
-    observaciones:string;
+    observaciones:string | null | undefined;
     fecha:Date;
 } ;

@@ -1,6 +1,6 @@
-import { SeguimientoDTO } from "../../DTOs/SeguimientoDTO.js";
+/*import { SeguimientoDTO } from "../../DTOs/SeguimientoDTO.js";
 import { SeguimientoRepository } from "../../interfaces/SeguimientoRepository.js";
-import { SeguimientoModel } from "./Seguimiento.js";
+import { SeguimientoModel } from '../../casosuso/Seguimiento/Seguimiento.js';
 
 export class SeguimientoRepositoryMongo implements SeguimientoRepository {
     async registrar(dto: SeguimientoDTO): Promise<SeguimientoDTO>{
@@ -8,4 +8,4 @@ export class SeguimientoRepositoryMongo implements SeguimientoRepository {
         const guardado = await seguimiento.save();
         return guardado.toObject();
     };
-};
+};*/

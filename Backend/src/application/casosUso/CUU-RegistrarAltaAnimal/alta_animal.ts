@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+/*import { Request, Response } from "express";
 import { Animal } from "../../../CRUDS/Animal/ani.entity";
 import { Vacuna }from "../../../CRUDS/Vacunas/vacu.entity";
 import { FichaMedica } from "../../../CRUDS/Ficha Medica/fmed.model";
@@ -52,4 +52,4 @@ export function registrarAltaAnimal(req: Request, res: Response): void {
     // Si cumple todo, se da de alta (disponible)
     animal.estado = { disponible: true, no_disponible: false };
     res.status(200).json({ message: 'El animal fue dado de alta y está disponible', animal });
-}
+}*/
