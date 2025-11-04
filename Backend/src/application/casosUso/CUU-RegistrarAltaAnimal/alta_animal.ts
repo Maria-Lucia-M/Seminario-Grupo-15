@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { Animal } from "../../../CRUDS/Animal/ani.entity";
-import { Vacuna }from "../../../CRUDS/Vacunas/vacu.entity";
+import { Vacuna } from "../../DTOs/VacunaDTO.js";
 import { FichaMedicaDTO } from "../../DTOs/FichaMedicaDTO.js";
 
 // Simulación de datos en memoria

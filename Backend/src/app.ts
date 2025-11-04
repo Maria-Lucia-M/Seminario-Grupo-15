@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 //Rutas CRUDs:
 import { animalRoutes } from './CRUDS/Animal/animal.Routes.js';
 import { fichaMedicaRoutes} from './CRUDS/FichaMedica/fichaMed.Routes.js'
+import { vacunaRouter } from './CRUDS/Vacunas/vacuna.Routes.js';
 
 //Rutas del sistema:
 import { RegistrarSeguimientoRoutes } from './application/CasosUso/Seguimiento/RegistrarSeguimiento.routes.js';
@@ -26,5 +27,6 @@ app.listen(3000, () => {
 app.use('/api', RegistrarSeguimientoRoutes);
 app.use('/api', animalRoutes);
 app.use('/api', fichaMedicaRoutes);
+app.use('/api', vacunaRouter);
 
 export default app;
