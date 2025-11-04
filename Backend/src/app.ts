@@ -7,7 +7,7 @@ import { animalRoutes } from './CRUDS/Animal/animal.Routes.js';
 import { fichaMedicaRoutes} from './CRUDS/FichaMedica/fichaMed.Routes.js'
 
 //Rutas del sistema:
-import { RegistrarSeguimientoRoutes } from './application/casosuso/Seguimiento/RegistrarSeguimiento.routes.js';
+import { RegistrarSeguimientoRoutes } from './application/CasosUso/Seguimiento/RegistrarSeguimiento.routes.js';
 
 dotenv.config();
 const app = express();

@@ -20,7 +20,7 @@ export const findAllFichas = async (req: Request, res: Response): Promise<void> 
 
 export const getOneFichaMedica = async (req: Request, res: Response): Promise<void> => {
     try{
-        const nro = parseInt(req.params.nro, 10);
+        const nro = parseInt(req.params.nro_ficha, 10);
         if (isNaN(nro)) {
             res.status(400).json({ message: 'Número de Ficha Medica inválido' });
             return;
@@ -61,7 +61,7 @@ export const registrarFichaMedicaController = async (req: Request, res: Response
 
 export const actualizarFichaMedica = async (req: Request, res: Response): Promise<void> => {
     try {
-        const nro = parseInt(req.params.nro, 10);
+        const nro = parseInt(req.params.nro_ficha, 10);
         if (isNaN(nro)) {
             res.status(400).json({ message: 'Número de Ficha Medica inválido' });
             return;
@@ -89,7 +89,7 @@ export const actualizarFichaMedica = async (req: Request, res: Response): Promis
 
 export const eliminarFichaMedica = async (req: Request, res: Response): Promise<void> => {
     try{
-        const nro = parseInt(req.params.nro, 10);
+        const nro = parseInt(req.params.nro_ficha, 10);
         if (isNaN(nro)) {
             res.status(400).json({ message: 'Número de Ficha Medica inválido' });
             return;

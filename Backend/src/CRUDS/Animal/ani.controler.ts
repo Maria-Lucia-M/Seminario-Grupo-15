@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+/*import { Request, Response } from 'express';
 import { Animal } from './ani.entity';
 
 export class AnimalController {
@@ -45,4 +45,4 @@ export class AnimalController {
             res.status(404).json({ message: 'Animal no encontrado' });
         }
     }
-}
+}*/

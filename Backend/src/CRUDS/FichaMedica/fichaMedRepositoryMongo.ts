@@ -23,17 +23,17 @@ export class FichaMedicaRepositoryMongo {
     };
 
     async buscarPorNro(nro: number): Promise<FichaMedicaDTO | null> {
-        const guardado = await FichaMedicaModel.findOne({ nro }).lean();
+        const guardado = await FichaMedicaModel.findOne({ nro_ficha: nro }).lean();
         return guardado ? mapearFichaMedica(guardado) : null;
     };
 
     async actualizar(nro: number, dto: Partial<FichaMedicaDTO>): Promise<FichaMedicaDTO | null> {
-        const guardado = await FichaMedicaModel.findOneAndUpdate({ nro }, dto, { new: true }).lean();
+        const guardado = await FichaMedicaModel.findOneAndUpdate({ nro_ficha: nro }, dto, { new: true }).lean();
         return guardado ? mapearFichaMedica(guardado) : null;
     };
 
     async eliminar(nro: number): Promise<boolean> {
-        const resultado = await FichaMedicaModel.deleteOne({ nro });
+        const resultado = await FichaMedicaModel.deleteOne({ nro_ficha: nro });
         return resultado.deletedCount === 1;
     };
 };

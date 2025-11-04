@@ -1,6 +1,6 @@
 type Especie = 'Perro' | 'Gato';
 
-type Estado = 'Apto' | 'No apto' | 'En adopcion' | 'Adoptado';
+type Estado = 'Apto' | 'No apto' | 'En adopcion' | 'Adoptado' | 'disponible' | 'no_disponible';
 
 export interface AnimalDTO {
     nro: number;

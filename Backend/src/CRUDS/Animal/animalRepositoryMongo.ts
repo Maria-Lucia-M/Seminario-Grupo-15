@@ -4,10 +4,10 @@ import { mapearAnimal } from './mapearAnimal.js';
 
 type Especie = 'Perro' | 'Gato';
 
-type Estado = 'Apto' | 'No apto' | 'En adopcion' | 'Adoptado';
+type Estado = 'Apto' | 'No apto' | 'En adopcion' | 'Adoptado' | 'disponible' | 'no_disponible';
 
 const especieValida: Especie[] = ['Perro', 'Gato'];
-const estadoValido: Estado[] = ['Apto', 'No apto', 'En adopcion', 'Adoptado'];
+const estadoValido: Estado[] = ['Apto', 'No apto', 'En adopcion', 'Adoptado', 'disponible', 'no_disponible'];
 
 export class AnimalRepositoryMongo {
     async registrar(dto: AnimalDTO): Promise<AnimalDTO> {

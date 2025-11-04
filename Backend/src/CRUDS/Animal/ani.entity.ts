@@ -5,7 +5,7 @@ export class Animal {
     edad_estimada: bigint;
     fecha_ingreso: Date;
     fecha_defuncion: Date | null;
-    estado: { apto: boolean; no_apto: boolean; en_adopcion: boolean; adoptado: boolean };
+    estado: { apto: boolean; no_apto: boolean; en_adopcion: boolean; adoptado: boolean; disponible: boolean; no_disponible: boolean };
     imagen: string[];
     video: string[]; 
 
@@ -16,7 +16,7 @@ export class Animal {
         edad_estimada: bigint,
         fecha_ingreso: Date,
         fecha_defuncion: Date | null,
-        estado: { apto: boolean; no_apto: boolean; en_adopcion: boolean; adoptado: boolean },
+        estado: { apto: boolean; no_apto: boolean; en_adopcion: boolean; adoptado: boolean; disponible: boolean; no_disponible: boolean },
         imagen: string[],
         video: string[]
     ) {

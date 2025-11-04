@@ -1,12 +1,12 @@
-/*import { Request, Response } from "express";
+import { Request, Response } from "express";
 import { Animal } from "../../../CRUDS/Animal/ani.entity";
 import { Vacuna }from "../../../CRUDS/Vacunas/vacu.entity";
-import { FichaMedica } from "../../../CRUDS/Ficha Medica/fmed.model";
+import { FichaMedicaDTO } from "../../DTOs/FichaMedicaDTO.js";
 
 // Simulación de datos en memoria
 const animales: Animal[] = [];
 const vacunasAlDia: Vacuna[] = [];
-const fichasMedicas: FichaMedica[] = [];
+const fichasMedicas: FichaMedicaDTO[] = [];
 
 // Caso de uso: registrar alta de animal
 export function registrarAltaAnimal(req: Request, res: Response): void {
@@ -39,17 +39,20 @@ export function registrarAltaAnimal(req: Request, res: Response): void {
     if (typeof finalizoAdopcion === 'boolean') {
         if (finalizoAdopcion) {
             // Si finalizó correctamente, el animal pasa a no disponible
-            animal.estado = { disponible: false, no_disponible: true };
+            animal.estado.no_disponible = true;
+            animal.estado.disponible = false;
             res.status(200).json({ message: 'El animal finalizó la adopción y está no disponible', animal });
         } else {
             // Si no finalizó, el animal sigue no disponible
-            animal.estado = { disponible: false, no_disponible: true };
+            animal.estado.no_disponible = true;
+            animal.estado.disponible = false;
             res.status(200).json({ message: 'El animal no finalizó la adopción, sigue no disponible', animal });
         }
         return;
     }
 
     // Si cumple todo, se da de alta (disponible)
-    animal.estado = { disponible: true, no_disponible: false };
+    animal.estado.disponible = true;
+    animal.estado.no_disponible = false;
     res.status(200).json({ message: 'El animal fue dado de alta y está disponible', animal });
-}*/
+}

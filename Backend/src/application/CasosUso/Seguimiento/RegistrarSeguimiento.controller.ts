@@ -1,4 +1,4 @@
-/*import { Request, Response } from "express";
+import { Request, Response } from "express";
 import { RegistrarSeguimiento } from "./RegistrarSeguimiento.js";
 import { SeguimientoRepositoryMongo } from "./SeguimientoRepositoryMongo.js";
 
@@ -13,4 +13,4 @@ export const RegistrarSeguimentoController = async (req: Request, res: Response)
         res.status(500).json({message: "Error interno del servidor"});
         return;
     };
-};*/
+};
