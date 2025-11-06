@@ -1,0 +1,45 @@
+### Obtener todas las vacunas
+GET http://localhost:3000/api/vacunas
+
+### Obtener una vacuna por nro
+GET http://localhost:3000/api/vacunas/1
+
+### Registrar una nueva vacuna
+POST http://localhost:3000/api/vacunas
+Content-Type: application/json
+
+{
+    "nro_vacuna": 2,
+    "fecha_vencimiento": "2026-05-01",
+    "droga": [
+        {
+            "nombre": "DrogaC",
+            "descripcion": "Descripcion de DrogaC"
+        },
+        {
+            "nombre": "DrogaD",
+            "descripcion": "Descripcion de DrogaD"
+        }
+    ],
+    "stock": 50,
+    "fecha_ingreso": "2025-06-15"
+}
+
+### Actualizar una vacuna existente
+PUT http://localhost:3000/api/vacunas/1
+Content-Type: application/json
+
+{
+    "fecha_vencimiento": "2026-12-01",
+    "droga": [
+        {
+            "nombre": "DrogaC",
+            "descripcion": "Descripcion de DrogaC"
+        }
+    ],
+    "stock": 150,
+    "fecha_ingreso": "2024-07-01"
+}
+
+### Eliminar una vacuna
+DELETE http://localhost:3000/api/vacunas/1

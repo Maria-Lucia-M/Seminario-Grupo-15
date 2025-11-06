@@ -1,0 +1,31 @@
+### Obtener todas las fichas medicas
+GET http://localhost:3000/api/fichasMed
+
+### Obtener una ficha medica por nro
+GET http://localhost:3000/api/fichasMed/3
+
+### Registrar una nueva ficha medica
+POST http://localhost:3000/api/fichasMed
+Content-Type: application/json
+
+{
+    "nro_ficha": 3,
+    "nro_animal": 1,
+    "matricula": "202020",
+    "nro_vacunas": [2,3],
+    "observaciones": "Vacunas colocadas",
+    "fecha": "2025-10-01"
+}
+
+### Actualizar una ficha existente
+PUT http://localhost:3000/api/fichasMed/1
+Content-Type: application/json
+
+{
+    "nro_vacunas": [1, 2, 3],
+    "observaciones": "Nuevas vacunas colocadas",
+    "fecha": "2025-12-01"
+}
+
+### Eliminar una ficha existente
+DELETE http://localhost:3000/api/fichasMed/3

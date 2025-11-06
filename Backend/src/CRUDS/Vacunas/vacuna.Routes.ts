@@ -1,12 +1,10 @@
 import { Router } from 'express';
-import { VacunaController } from './vacu.controller';
+import { findAllVacunas, getOneVacuna, registrarVacunaController, actualizarVacuna, eliminarVacuna } from './vacu.controller.js';
 
-const router = Router();
-const vacunaController = new VacunaController();
+export const vacunaRouter = Router();
 
-export function setRoutes(app: Router) {
-    app.post('/vacunas', vacunaController.createVacuna.bind(vacunaController));
-    app.get('/vacunas/:nro_vacuna', vacunaController.getVacuna.bind(vacunaController));
-    app.put('/vacunas/:nro_vacuna', vacunaController.updateVacuna.bind(vacunaController));
-    app.delete('/vacunas/:nro_vacuna', vacunaController.deleteVacuna.bind(vacunaController));
-}
+vacunaRouter.get('/vacunas', findAllVacunas);
+vacunaRouter.get('/vacunas/:nro_vacuna', getOneVacuna);
+vacunaRouter.post('/vacunas', registrarVacunaController);
+vacunaRouter.put('/vacunas/:nro_vacuna', actualizarVacuna);
+vacunaRouter.delete('/vacunas/:nro_vacuna', eliminarVacuna);

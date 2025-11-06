@@ -4,6 +4,8 @@ import dotenv from "dotenv";
 import cors from 'cors';
 //Rutas CRUDs:
 import { animalRoutes } from './CRUDS/Animal/animal.Routes.js';
+import { fichaMedicaRoutes } from './CRUDS/FichaMedica/fichaMed.Routes.js';
+import { vacunaRouter } from './CRUDS/Vacunas/vacuna.Routes.js';
 //Rutas del sistema:
 import { seguimientoRouter } from './application/CasosUso/Seguimiento/RegistrarSeguimiento.routes.js';
 dotenv.config();
@@ -24,5 +26,7 @@ app.listen(3000, () => {
 });
 app.use('/api/seguimientos', seguimientoRouter);
 app.use('/api', animalRoutes);
+app.use('/api', fichaMedicaRoutes);
+app.use('/api', vacunaRouter);
 export default app;
 //# sourceMappingURL=app.js.map
