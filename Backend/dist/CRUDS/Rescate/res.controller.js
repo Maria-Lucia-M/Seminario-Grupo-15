@@ -1,7 +1,5 @@
 export class RescateController {
-    constructor() {
-        this.rescates = [];
-    }
+    rescates = [];
     createRescate(req, res) {
         const { lugar_rescate, fecha_rescate, nro_animal, dni_rescatista } = req.body;
         const newRescate = { lugar_rescate, fecha_rescate: new Date(fecha_rescate), nro_animal, dni_rescatista };

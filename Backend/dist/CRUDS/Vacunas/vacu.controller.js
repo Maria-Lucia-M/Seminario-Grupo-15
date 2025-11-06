@@ -1,8 +1,6 @@
 import Vacuna from './vacu.entity';
 export class VacunaController {
-    constructor() {
-        this.vacunas = [];
-    }
+    vacunas = [];
     createVacuna(req, res) {
         const { nro_vacuna, fecha_vencimiento, droga, stock, fecha_ingreso } = req.body;
         const newVacuna = new Vacuna(nro_vacuna, fecha_vencimiento, droga, stock, fecha_ingreso);

@@ -1,4 +1,8 @@
 export class Rescate {
+    lugar_rescate;
+    fecha_rescate;
+    nro_animal;
+    dni_rescatista;
     constructor(lugar_rescate, fecha_rescate, nro_animal, dni_rescatista) {
         this.lugar_rescate = lugar_rescate;
         this.fecha_rescate = fecha_rescate;

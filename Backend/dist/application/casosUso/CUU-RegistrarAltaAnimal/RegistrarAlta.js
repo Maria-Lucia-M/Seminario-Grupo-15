@@ -1,4 +1,5 @@
 export class RegistrarAlta {
+    repo;
     constructor(repo) {
         this.repo = repo;
     }

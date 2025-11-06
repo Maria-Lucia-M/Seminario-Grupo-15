@@ -1,8 +1,6 @@
 import { Donacion } from './don.entity';
 export class DonacionController {
-    constructor() {
-        this.donaciones = [];
-    }
+    donaciones = [];
     createDonacion(req, res) {
         const { nro_donacion, tipo, cantidad, descripcion, fecha_vencimiento } = req.body;
         const newDonacion = new Donacion(nro_donacion, tipo, cantidad, descripcion, new Date(fecha_vencimiento));

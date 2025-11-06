@@ -1,8 +1,6 @@
 import { Entrevista } from './ent.entity';
 export class EntrevistaController {
-    constructor() {
-        this.entrevista = [];
-    }
+    entrevista = [];
     createEntrevista(req, res) {
         const { id_entrevista, fecha, hora, descripcion, adopcion_aprobada, adoptante_dni, colaborador_id } = req.body;
         const fecha_rep = null;

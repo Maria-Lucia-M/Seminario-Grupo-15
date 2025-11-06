@@ -1,4 +1,10 @@
 export class FichaMedica {
+    id_ficha;
+    fecha;
+    id_animal;
+    matricula_vet;
+    observaciones;
+    nro_vacunas;
     constructor(id_ficha, fecha, id_animal, matricula_vet, observaciones, vacunas) {
         this.id_ficha = id_ficha;
         this.fecha = fecha;

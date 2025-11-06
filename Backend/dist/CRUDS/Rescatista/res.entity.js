@@ -1,4 +1,8 @@
 export class Rescatista {
+    dni;
+    nombre;
+    apellido;
+    telefono;
     constructor(dni, nombre, apellido, telefono) {
         this.dni = dni;
         this.nombre = nombre;

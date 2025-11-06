@@ -1,4 +1,14 @@
 export class Entrevista {
+    id_entrevista;
+    fecha;
+    hora;
+    fecha_rep;
+    hora_rep;
+    estado_ent;
+    descripcion;
+    adopcion_aprobada;
+    adoptante_dni; // Solo el DNI
+    colaborador_id; // Solo el ID
     constructor(id_entrevista, fecha, hora, fecha_rep, hora_rep, estado_ent, descripcion, adopcion_aprobada, adoptante_dni, colaborador_id) {
         this.id_entrevista = id_entrevista;
         this.fecha = fecha;

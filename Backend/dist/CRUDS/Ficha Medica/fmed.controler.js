@@ -1,8 +1,6 @@
 import { FichaMedica } from "./fmed.entity";
 export class FichaMedicaController {
-    constructor() {
-        this.fichas = [];
-    }
+    fichas = [];
     createFicha(req, res) {
         const { id_ficha, fecha, id_animal, matricula_vet, observaciones, nro_vacunas } = req.body;
         const nuevaFicha = new FichaMedica(id_ficha, fecha, id_animal, matricula_vet, observaciones, nro_vacunas);

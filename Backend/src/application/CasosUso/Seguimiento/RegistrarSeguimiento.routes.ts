@@ -1,6 +1,9 @@
 import { Router } from "express";
-import { RegistrarSeguimentoController } from "./RegistrarSeguimiento.controller.js";
+import { 
+    RegistrarSeguimentoController,
+    ObtenerSeguimientosController} from "./RegistrarSeguimientoController.js";
 
-export const RegistrarSeguimientoRoutes = Router();
+export const seguimientoRouter = Router();
 
-RegistrarSeguimientoRoutes.post("/seguimientos", RegistrarSeguimentoController);
+seguimientoRouter.get("/", ObtenerSeguimientosController);
+seguimientoRouter.post("/seguimientos", RegistrarSeguimentoController);

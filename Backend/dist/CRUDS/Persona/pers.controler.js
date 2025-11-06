@@ -1,8 +1,6 @@
 import { Persona } from './per.entity';
 export class PersonaController {
-    constructor() {
-        this.personas = [];
-    }
+    personas = [];
     createPersona(req, res) {
         const { dni, nombre, apellido, mail, contraseña, telefono, veterinario, adoptante, colaborador } = req.body;
         const newPersona = new Persona(dni, nombre, apellido, mail, contraseña, telefono, veterinario || null, adoptante || null, colaborador || null);

@@ -1,4 +1,5 @@
 export class RegistrarAnimal {
+    repo;
     constructor(repo) {
         this.repo = repo;
     }

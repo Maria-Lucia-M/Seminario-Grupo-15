@@ -1,8 +1,6 @@
 import { Animal } from './ani.entity';
 export class AnimalController {
-    constructor() {
-        this.animales = [];
-    }
+    animales = [];
     createAnimal(req, res) {
         const { nro, especie, raza, edad_estimada, fecha_ingreso, imagen, video } = req.body;
         const fecha_defuncion = null;

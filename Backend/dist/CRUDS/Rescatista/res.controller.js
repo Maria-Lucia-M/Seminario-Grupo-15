@@ -1,8 +1,6 @@
 import { Rescatista } from "./res.entity";
 export class RescatistaController {
-    constructor() {
-        this.rescatistas = [];
-    }
+    rescatistas = [];
     createRescatista(req, res) {
         const { dni, nombre, apellido, telefono } = req.body;
         const newRescatista = new Rescatista(dni, nombre, apellido, telefono);

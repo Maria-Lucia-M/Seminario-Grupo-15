@@ -1,8 +1,6 @@
 import { Adopcion } from './adop.entity';
 export class AdopcionController {
-    constructor() {
-        this.adopciones = [];
-    }
+    adopciones = [];
     createAdopcion(req, res) {
         const { nro_adopcion, nro_animal, dni_adoptante, fecha_adopcion } = req.body;
         const fecha_retiro = null;

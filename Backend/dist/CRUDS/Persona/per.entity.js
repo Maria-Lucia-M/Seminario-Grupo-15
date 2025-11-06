@@ -1,4 +1,13 @@
 export class Persona {
+    dni;
+    nombre;
+    apellido;
+    mail;
+    contraseña;
+    telefono;
+    veterinario;
+    adoptante;
+    colaborador;
     constructor(dni, nombre, apellido, mail, contraseña, telefono, veterinario = null, adoptante = null, colaborador = null) {
         this.dni = dni;
         this.nombre = nombre;

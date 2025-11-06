@@ -1,4 +1,5 @@
 export class RegistrarSeguimiento {
+    repo;
     constructor(repo) {
         this.repo = repo;
     }
