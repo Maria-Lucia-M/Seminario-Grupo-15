@@ -27,6 +27,13 @@ export class FichaMedicaRepositoryMongo {
         return guardado ? mapearFichaMedica(guardado) : null;
     };
 
+    async asignarNroFicha(): Promise<number> {
+        const result = await this.getAll();
+        const numeros = result.map(ficha => ficha.nro_ficha);
+        const maxNro = numeros.length > 0 ? Math.max(...numeros) : 0;
+        return maxNro + 1;
+    };
+
     async actualizar(nro: number, dto: Partial<FichaMedicaDTO>): Promise<FichaMedicaDTO | null> {
         const guardado = await FichaMedicaModel.findOneAndUpdate({ nro_ficha: nro }, dto, { new: true }).lean();
         return guardado ? mapearFichaMedica(guardado) : null;

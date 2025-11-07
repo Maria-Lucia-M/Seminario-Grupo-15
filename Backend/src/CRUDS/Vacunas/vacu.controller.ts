@@ -2,6 +2,50 @@ import { Request, Response } from 'express';
 import { RegistrarVacuna } from './registrarVacuna.js';
 import { VacunaRepositoryMongo } from './vacunaRepositoryMongo.js';
 
+export const validarVacunas = async (req: Request, res: Response) => {
+  try {
+    const { vacunas } = req.body;
+
+    if (!vacunas || !Array.isArray(vacunas) || vacunas.length === 0) {
+      return res.status(400).json({ message: "Debe seleccionar al menos una vacuna" });
+    }
+
+    const repo = new VacunaRepositoryMongo();
+    const vacunasInvalidas = [];
+
+    for (const nro_vacuna of vacunas) {
+      const vacuna = await repo.buscarPorNro(nro_vacuna);
+      if (!vacuna) {
+        vacunasInvalidas.push({ nro_vacuna, motivo: "No existe" });
+        continue;
+      }
+
+      const hoy = new Date();
+
+      if (new Date(vacuna.fecha_vencimiento) < hoy) {
+        vacunasInvalidas.push({ nro_vacuna, motivo: "Vencida" });
+      }
+
+      if (vacuna.stock < 1) {
+        vacunasInvalidas.push({ nro_vacuna, motivo: "Sin stock" });
+      }
+    }
+
+    if (vacunasInvalidas.length > 0) {
+      return res.status(400).json({
+        message: "Algunas vacunas se encuentran vencidas o sin stock",
+        detalles: vacunasInvalidas,
+      });
+    }
+    
+    return res.status(200).json({ message: "Vacunas válidas" });
+  } catch (error:any) {
+    console.error("Error al validar vacunas:", error);
+    return res.status(500).json({ message: "Error interno del servidor" });
+  }
+};
+
+
 export const findAllVacunas = async (req: Request, res: Response): Promise<void> => {
     try{
         const Vacunas = await new VacunaRepositoryMongo().getAll();
