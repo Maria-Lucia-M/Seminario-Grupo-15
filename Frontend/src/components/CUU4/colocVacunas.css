@@ -1,0 +1,150 @@
+
+.colocacion-vacunas-section {
+  padding: 20px;
+  background-color: #f9f9f9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.seleccion-vacunas-titulo {
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: #333;
+  text-align: center;
+}
+
+.subtitulo-vacunas {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #3f3f3f;
+  text-align: center;
+}
+
+.boton-seleccionar{
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 15px;
+  position: relative;
+  left: 60%;
+}
+
+.boton-seleccionar:hover {
+  background-color: #0056b3;
+}
+
+.lista-vacunas {
+  list-style-type: none;
+  padding: 0;
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 20px;
+}
+
+.lista-vacunas li {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #3b3b3b;
+}
+
+.seleccionar-vacuna {
+  margin-right: 10px;
+  background-color: #007bff;
+}
+
+.seleccionar-vacuna:hover {
+  background-color: #0056b3;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-contenido {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  width: 400px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.modal-contenido h2 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #333;
+  text-align: center;
+}
+
+.modal-contenido p {
+  margin-bottom: 15px;
+  color: #555;
+  text-align: center;
+}
+
+.modal-contenido ul {
+  list-style-type: disc;
+  padding-left: 20px;
+  margin-bottom: 15px;
+  color: #444;
+}
+
+.modal-contenido label {
+  display: block;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+.modal-contenido input,
+.modal-contenido textarea {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.modal-contenido button {
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 2%;
+}
+
+.modal-contenido button:hover {
+  background-color: #0056b3;
+}
+
+.boton-volver-inicio{
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  position: relative;
+  right: 80%;
+}
+
+.boton-volver-inicio:hover {
+  background-color: #0056b3;
+}
