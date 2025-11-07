@@ -1,12 +1,16 @@
-import { Router } from "express";
-import { RescatistaController } from "./res.controller";
+import { Router } from 'express';
+import { 
+    findAllRescatista,
+    getOneRescatista, 
+    registrarRescatistaController,
+    actualizarRescatista,
+    eliminarRescatista
+} from './rescatista.controller.js';
 
-const router = Router();
-const rescatistaController = new RescatistaController();
+export const rescatistaRoutes = Router();
 
-export function setRoutes(app: Router) {
-  app.post('/rescatistas', rescatistaController.createRescatista.bind(rescatistaController));
-  app.get('/rescatistas/:dni', rescatistaController.getRescatista.bind(rescatistaController));
-  app.put('/rescatistas/:dni', rescatistaController.updateRescatista.bind(rescatistaController));
-  app.delete('/rescatistas/:dni', rescatistaController.deleteRescatista.bind(rescatistaController));
-}
+rescatistaRoutes.get('/rescatistas', findAllRescatista);
+rescatistaRoutes.get('/rescatistas/:dni', getOneRescatista);
+rescatistaRoutes.post('/rescatistas', registrarRescatistaController);
+rescatistaRoutes.put('/rescatistas/:dni', actualizarRescatista);
+rescatistaRoutes.delete('/rescatistas/:dni', eliminarRescatista);

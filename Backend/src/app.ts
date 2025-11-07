@@ -7,6 +7,8 @@ import cors from 'cors';
 import { animalRoutes } from './CRUDS/Animal/animal.Routes.js';
 import { fichaMedicaRoutes} from './CRUDS/FichaMedica/fichaMed.Routes.js'
 import { vacunaRouter } from './CRUDS/Vacunas/vacuna.Routes.js';
+import { rescateRoutes } from './CRUDS/Rescate/rescate.Routes.js';
+import { rescatistaRoutes } from './CRUDS/Rescatista/rescatista.Routes.js';
 
 //Rutas del sistema:
 import { seguimientoRouter } from './application/CasosUso/Seguimiento/RegistrarSeguimiento.routes.js';
@@ -35,5 +37,7 @@ app.use('/api/seguimientos', seguimientoRouter);
 app.use('/api', animalRoutes);
 app.use('/api', fichaMedicaRoutes);
 app.use('/api', vacunaRouter);
+app.use('/api', rescateRoutes);
+app.use('/api', rescatistaRoutes);
 
 export default app;

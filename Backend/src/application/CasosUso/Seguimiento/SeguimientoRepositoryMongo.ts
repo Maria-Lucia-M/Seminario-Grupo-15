@@ -1,10 +1,6 @@
 import { SeguimientoDTO } from "../../DTOs/SeguimientoDTO.js";
 import { SeguimientoRepository } from "../../interfaces/SeguimientoRepository.js";
-<<<<<<< HEAD
 import { SeguimientoModel } from "../../CasosUso/Seguimiento/Seguimiento.js";
-=======
-import { SeguimientoModel } from '../../CasosUso/Seguimiento/Seguimiento.js';
->>>>>>> origin/main
 
 export class SeguimientoRepositoryMongo implements SeguimientoRepository {
     async registrar(dto: SeguimientoDTO): Promise<SeguimientoDTO>{

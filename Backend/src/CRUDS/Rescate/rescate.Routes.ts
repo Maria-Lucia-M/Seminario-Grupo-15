@@ -1,12 +1,16 @@
 import { Router } from 'express';
-import { RescateController } from './res.controller';
+import { 
+    findAllRescates,
+    getOneRescate, 
+    registrarRescateController,
+    actualizarRescate,
+    eliminarRescate
+} from './rescate.controller.js';
 
-const router = Router();
-const rescateController = new RescateController();
+export const rescateRoutes = Router();
 
-export function setRoutes(app: Router) {
-    app.post('/rescates', rescateController.createRescate.bind(rescateController));
-    app.get('/rescates/:nro_animal', rescateController.getRescate.bind(rescateController));
-    app.put('/rescates/:nro_animal', rescateController.updateRescate.bind(rescateController));
-    app.delete('/rescates/:nro_animal', rescateController.deleteRescate.bind(rescateController));
-}
+rescateRoutes.get('/rescates', findAllRescates);
+rescateRoutes.get('/rescates/:nro', getOneRescate);
+rescateRoutes.post('/rescates', registrarRescateController);
+rescateRoutes.put('/rescates/:nro', actualizarRescate);
+rescateRoutes.delete('/rescates/:nro', eliminarRescate);
