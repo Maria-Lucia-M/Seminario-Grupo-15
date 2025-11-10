@@ -9,6 +9,7 @@ import { fichaMedicaRoutes} from './CRUDS/FichaMedica/fichaMed.Routes.js'
 import { vacunaRouter } from './CRUDS/Vacunas/vacuna.Routes.js';
 import { rescateRoutes } from './CRUDS/Rescate/rescate.Routes.js';
 import { rescatistaRoutes } from './CRUDS/Rescatista/rescatista.Routes.js';
+import { personaRouter } from './CRUDS/Persona/persona.Routes.js';
 
 //Rutas del sistema:
 import { seguimientoRouter } from './application/CasosUso/Seguimiento/RegistrarSeguimiento.routes.js';
@@ -39,5 +40,6 @@ app.use('/api', fichaMedicaRoutes);
 app.use('/api', vacunaRouter);
 app.use('/api', rescateRoutes);
 app.use('/api', rescatistaRoutes);
+app.use('/api/personas', personaRouter);
 
 export default app;
