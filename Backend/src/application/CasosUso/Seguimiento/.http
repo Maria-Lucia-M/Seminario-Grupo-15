@@ -1,3 +1,7 @@
+### Obtener todos los seguimientos
+GET http://localhost:3000/api/seguimientos
+
+### Alta seguimiento
 POST http://localhost:3000/api/seguimientos
 Content-Type: application/json
 
@@ -5,5 +9,5 @@ Content-Type: application/json
     "nro_adopcion": 1,
     "fecha_seguimiento": "2024-10-10",
     "entorno": "Ambiente familiar adecuado",
-    "estado_animal": "No adoptado"
+    "estado_animal": "Adoptado"
 }

@@ -8,6 +8,7 @@ export class VacunaRepositoryMongo {
         const guardado = await vacuna.save();
         return {
             nro_vacuna: guardado.nro_vacuna,
+            nombre: guardado.nombre,
             fecha_vencimiento: guardado.fecha_vencimiento,
             droga: guardado.droga,
             stock: guardado.stock,

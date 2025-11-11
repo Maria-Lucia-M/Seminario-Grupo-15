@@ -8,4 +8,9 @@ export class SeguimientoRepositoryMongo implements SeguimientoRepository {
         const guardado = await seguimiento.save();
         return guardado.toObject();
     };
+
+    async obtenerTodos(): Promise<SeguimientoDTO[]>{
+        const seguimientos = await SeguimientoModel.find().lean();
+        return seguimientos;
+    };
 };

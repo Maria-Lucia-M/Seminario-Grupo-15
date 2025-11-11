@@ -7,6 +7,7 @@ const DrogaSchema = new Schema({
 
 const VacunaSchema = new Schema({
     nro_vacuna: { type: Number, required: true },
+    nombre: { type: String, required: true },
     fecha_vencimiento: { type: Date, required: true },
     droga: { type: [DrogaSchema], required: true },
     stock: { type: Number, required: true },
