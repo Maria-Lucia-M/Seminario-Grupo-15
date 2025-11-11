@@ -1,9 +1,18 @@
-POST http://localhost:3000/api/seguimientos
+### Obtener todos los seguimientos
+GET http://localhost:3000/api/altas-animal
+
+### Alta seguimiento
+POST http://localhost:3000/api/altas-animal
 Content-Type: application/json
 
 {
-    "nro_adopcion": 1,
-    "fecha_seguimiento": "2024-10-10",
-    "entorno": "Ambiente familiar adecuado",
-    "estado_animal": "No apto"
+    "nro": 1,
+    "especie": "perro",
+    "raza": "otro",
+    "edad_estimada": 5,
+    "fecha_ingreso": "2025-10-10",
+    "fecha_defuncion": null,
+    "estado": "apto",
+    "imagen": "https://media.istockphoto.com/id/1041987488/es/foto/lindo-perro-de-poner-su-cara-en-sus-rodillas-y-el-hombre-sonriente-de-las-manos-rascarse-el.jpg?s=612x612&w=0&k=20&c=_-QrG1QimtXPttueHgPSkhchwUcn8DNtEclUpV991Cg=",
+    "video": null
 }

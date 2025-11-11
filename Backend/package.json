@@ -1,6 +1,6 @@
 {
   "name": "sara",
-  "type": "module",
+  "type": "commonjs",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
@@ -19,12 +19,12 @@
     "tsc-watch": "^6.3.1",
     "typescript": "5.9.2"
   },
-  "scripts": {
-    "build": "tsc -p ./tsconfig.json",
-    "start:dev": "cross-env NODE_ENV=development tsc-watch --noClear -p ./tsconfig.json --onSuccess \"node ./dist/main.js\"",
-    "start": "cross-env NODE_ENV=production tsc-watch --noClear -p ./tsconfig.json --onSuccess \"node ./dist/main.js\"",
-    "migrar:password": "ts-node-esm src/scripts/migrarPassword.ts"
-  },
+ "scripts": {
+  "build": "tsc -p ./tsconfig.json",
+  "start:dev": "cross-env NODE_ENV=development tsc-watch --noClear -p ./tsconfig.json --onSuccess \"node ./dist/main.js\"",
+  "start": "node dist/main.js",
+  "migrar:password": "ts-node src/scripts/migrarPassword.ts"
+},
   "keywords": [],
   "author": "",
   "license": "ISC",

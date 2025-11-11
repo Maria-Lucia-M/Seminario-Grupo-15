@@ -1,6 +1,9 @@
 import { Router } from "express";
-import { RegistrarAltaController } from "./RegistrarAlta.controller.js";
+import { 
+    RegistrarAltaController,
+    ObtenerAltasController} from "./RegistrarAltaController.js";
 
-export const RegistrarAltaRoutes = Router();
+export const altaRouter = Router();
 
-RegistrarAltaRoutes.post("/alta", RegistrarAltaController);
+altaRouter.get("/", ObtenerAltasController);
+altaRouter.post("/", RegistrarAltaController);
