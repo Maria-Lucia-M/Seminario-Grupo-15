@@ -1,0 +1,18 @@
+Convención para nombres de ramas:
+//*****************************//
+
+Formato: `<tipo>/<objetivo-claro>`
+
+### Tipos
+- `feature/`: nueva funcionalidad
+- `fix/`: corrección de bug
+- `refactor/`: mejora interna
+- `hotfix/`: corrección urgente
+- `test/`: pruebas
+- `docs/`: documentación
+
+### Ejemplos
+- `feature/login`
+- `fix/login-auth`
+- `refactor/login-handler`
+- `feature/crud-animal`
