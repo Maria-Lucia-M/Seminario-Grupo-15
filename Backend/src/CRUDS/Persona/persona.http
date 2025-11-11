@@ -13,7 +13,7 @@ Content-Type: application/json
     "nombre": "Ana",
     "apellido": "Gómez",
     "email": "ana@sara.org",
-    "contraseña": "segura123",
+    "password": "segura123",
     "telefono": "3411234567",
     "veterinario": {
         "matricula": "VET-001",
@@ -70,5 +70,5 @@ Content-Type: application/json
 }
 
 ###DELETE - Eliminar persona por DNI
-DELETE http://localhost:3000/api/personas/12345678
+DELETE http://localhost:3000/api/personas/14587453
 Content-Type: application/json

@@ -1,7 +1,9 @@
 import { Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 
+
 //Rutas casos de uso
+import ColocacionVacunas from './pages/CUU4/ColocVacunas.tsx';
 import RegistrarSeguimiento from './pages/CUU-Seguimiento/SeguimientoPage';
 import AltaEntrevistaPage from './pages/CUU5-AltaEntrevista/AltaEntrevistaPage';
 import EntrevistaListPage from './pages/CUU5-AltaEntrevista/ListarEntrevistas'; 
@@ -13,6 +15,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
+      <Route path="/cuu/colocacion-vacunas" element={<ColocacionVacunas />} />
       <Route path="/cuu/registrar-seguimiento" element={<RegistrarSeguimiento />} />
       <Route path="/cuu/alta-entrevista" element={<AltaEntrevistaPage />} />
       <Route path="/cuu/listar-entrevistas" element={<EntrevistaListPage />} />

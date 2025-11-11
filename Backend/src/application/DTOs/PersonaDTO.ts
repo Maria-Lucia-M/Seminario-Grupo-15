@@ -17,7 +17,7 @@ export interface PersonaDTO {
     nombre:string;
     apellido:string;
     email:string;
-    contraseña:string;
+    password:string;
     telefono:string;
     veterinario: Veterinario | null;
     adoptante: Adoptante | null;
