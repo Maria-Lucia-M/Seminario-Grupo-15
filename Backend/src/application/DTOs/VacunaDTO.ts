@@ -5,6 +5,7 @@ interface Droga {
 
 export interface Vacuna {
     nro_vacuna: number;
+    nombre: string;
     fecha_vencimiento:Date;
     droga: Droga[];
     stock: number;

@@ -1,0 +1,1 @@
+//La logica del CUU4-Registrar colocacion de vacunas, se encuentra añadida en los CRUDs de vacuna y ficha medica

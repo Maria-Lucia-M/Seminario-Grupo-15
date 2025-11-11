@@ -7,7 +7,7 @@ export class RegistrarVacuna {
     async ejecutar(dto: Vacuna): Promise<Vacuna | string[]> {
         const errores: string[] = [];
 
-        if (!dto.nro_vacuna || !dto.fecha_vencimiento || !dto.droga || !dto.stock || !dto.fecha_ingreso) {
+        if (!dto.nro_vacuna || !dto.nombre || !dto.fecha_vencimiento || !dto.droga || !dto.stock || !dto.fecha_ingreso) {
             errores.push('Datos incompletos para registrar Vacuna');
             return errores;
         };
