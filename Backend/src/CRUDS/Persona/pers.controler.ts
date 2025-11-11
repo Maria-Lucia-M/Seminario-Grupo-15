@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
-import { Persona } from './per.entity';
+import { Persona } from './per.entity.js';
+import adoptanteService from '../../shared/personaService.js';
 
 export class PersonaController {
     private personas: Persona[] = [];
@@ -8,6 +9,8 @@ export class PersonaController {
         const { dni, nombre, apellido, mail, contraseña, telefono, veterinario, adoptante, colaborador } = req.body;
         const newPersona = new Persona(dni, nombre, apellido, mail, contraseña, telefono, veterinario || null, adoptante || null, colaborador || null);
         this.personas.push(newPersona);
+        // Solo agregar al servicio si es un adoptante
+        adoptanteService.agregarAdoptante(newPersona);
         res.status(201).json(newPersona);
     }
 
@@ -15,6 +18,8 @@ export class PersonaController {
         const { dni } = req.params;
         const persona = this.personas.find(p => p.dni === dni);
         if (persona) {
+            // Solo agregar al servicio si es un adoptante
+            adoptanteService.agregarAdoptante(persona);
             res.status(200).json(persona);
         } else {
             res.status(404).json({ message: 'Persona no encontrada' });

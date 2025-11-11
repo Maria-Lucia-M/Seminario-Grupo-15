@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { PersonaController } from './pers.controler';
+import { PersonaController } from './pers.controler.js';
 const router = Router();
 const personaController = new PersonaController();
 export function setRoutes(app) {
