@@ -4,11 +4,11 @@ export const estadoValido: EstadoEntrevista[] = ['PENDIENTE', 'APROBADA', 'RECHA
 
 export interface EntrevistaDTO {
     id: string;
-    nro_animal: string;
-    id_colaborador: number;
+    nro_animal: number;
+    id_colaborador: string;
     fecha_entrevista: Date;
     hora_entrevista: string;
-    dni_adoptante: string;
+    dni_adoptante: number;
     estado: EstadoEntrevista;
     descripcion: string | null ;
     fecha_rep: Date | null;

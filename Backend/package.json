@@ -13,7 +13,7 @@
     "@types/node": "^24.3.0",
     "body-parser": "^1.19.0",
     "express": "5.1.0",
-    "tsc-watch": "6.3.1",
+    "tsc-watch": "^6.3.1",
     "typescript": "5.9.2"
   },
   "scripts": {

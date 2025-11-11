@@ -1,12 +1,11 @@
 import { Router } from 'express';
-import { EntrevistaController } from './ent.controler';
+import { EntrevistaController } from './ent.controler.js';
 
-const router = Router();
+export const entrevistaRoutes = Router();
 const entrevistaController = new EntrevistaController();
 
-export function setRoutes(app: Router) {
-    app.post('/entrevistas', entrevistaController.createEntrevista.bind(entrevistaController));
-    app.get('/entrevistas/:id_entrevista', entrevistaController.getEntrevista.bind(entrevistaController));
-    app.put('/entrevistas/:id_entrevista', entrevistaController.updateEntrevista.bind(entrevistaController));
-    app.delete('/entrevistas/:id_entrevista', entrevistaController.deleteEntrevista.bind(entrevistaController));
-}
+// Rutas del CRUD de Entrevistas
+entrevistaRoutes.get('/entrevistas', entrevistaController.findAllEntrevistas.bind(entrevistaController));
+entrevistaRoutes.get('/entrevistas/:id', entrevistaController.getEntrevista.bind(entrevistaController));
+
+// entrevistaRoutes.post('/entrevistas', entrevistaController.createEntrevista.bind(entrevistaController));

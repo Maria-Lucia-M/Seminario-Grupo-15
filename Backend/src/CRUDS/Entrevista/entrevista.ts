@@ -3,10 +3,10 @@ import { estadoValido } from '../../application/DTOs/EntrevistaDTO.js';
 
 const entrevistaSchema = new Schema({
     nro_animal: { type: String, required: true },
-    id_colaborador: { type: Number, required: true },
+    id_colaborador: { type: String, required: true },
     fecha_entrevista: { type: Date, required: true },
     hora_entrevista: { type: String, required: true },
-    dni_adoptante: { type: String, required: true },
+    dni_adoptante: { type: Number, required: true },
     estado: { 
         type: String, 
         required: true,

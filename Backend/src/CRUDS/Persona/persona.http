@@ -28,10 +28,10 @@ POST http://localhost:3000/api/personas
 Content-Type: application/json
 
 {
-    "dni": 87654321,
+    "dni": 87633,
     "nombre": "Carlos",
     "apellido": "Pérez",
-    "email": "carlos@sara.org",
+    "email": "caryys@sara.org",
     "contraseña": "clave456",
     "telefono": "3417654321",
     "veterinario": null,
@@ -47,16 +47,16 @@ POST http://localhost:3000/api/personas
 Content-Type: application/json
 
 {
-    "dni": 12345678,
-    "nombre": "Ana",
+    "dni": 24456538954,
+    "nombre": "Pedro",
     "apellido": "Gómez",
-    "email": "ana@sara.org",
+    "email": "pgwdw@sara.org",
     "contraseña": "segura123",
-    "telefono": "3411234567",
+    "telefono": "24778989896",
     "veterinario": null,
     "adoptante": null,
     "colaborador": {
-        "id_colaborador": "COL-001",
+        "id_colaborador": "COL-007"
     }
 }
 

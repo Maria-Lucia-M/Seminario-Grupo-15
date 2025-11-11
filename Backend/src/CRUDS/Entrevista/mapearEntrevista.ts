@@ -1,7 +1,5 @@
-// Ajusta la ruta si es necesario
 import { EntrevistaDTO, EstadoEntrevista } from '../../application/DTOs/EntrevistaDTO.js';
 
-// doc: any es como lo tiene tu compañero, lo mantenemos igual
 export function mapearEntrevista(doc: any): EntrevistaDTO {
     return {
         id: doc._id.toString(), 
