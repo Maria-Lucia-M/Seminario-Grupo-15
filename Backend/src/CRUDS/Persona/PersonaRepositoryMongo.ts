@@ -1,4 +1,5 @@
 import { PersonaDTO } from "../../application/DTOs/PersonaDTO.js";
+import { PersonaConId } from "./extensionPersona.js";
 import { PersonaRepository } from "../../application/interfaces/PersonaRepository.js";
 import { PersonaModel } from "./personaModel.js";
 import { AdoptanteModel } from "./adoptanteModel.js";
@@ -42,4 +43,17 @@ export class PersonaRepositoryMongo implements PersonaRepository {
         return resultado.deletedCount === 1;
     };
 
+    async buscarPorEmail(email: string): Promise<PersonaConId | null> {
+        const persona = await PersonaModel.findOne({ email }).lean();
+        if (!persona) return null;
+
+        const plano = persona as unknown as PersonaConId;
+
+        return {
+            ...plano,
+            veterinario: plano.veterinario ?? null,
+            adoptante: plano.adoptante ?? null,
+            colaborador: plano.colaborador ?? null
+        };
+    };
 };

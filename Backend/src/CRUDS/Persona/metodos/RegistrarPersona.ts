@@ -7,7 +7,7 @@ export class RegistrarPersona {
     async ejecutar(dto:PersonaDTO):Promise<PersonaDTO | string[]>{
         const errores: string[] = [];
 
-        if (!dto.dni || !dto.nombre || !dto.apellido || !dto.email || !dto.contraseña || !dto.telefono) {
+        if (!dto.dni || !dto.nombre || !dto.apellido || !dto.email || !dto.password || !dto.telefono) {
             errores.push('Faltan datos obligatorios');
             return errores;
         };

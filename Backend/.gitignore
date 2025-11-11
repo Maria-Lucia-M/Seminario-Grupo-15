@@ -19,5 +19,6 @@ Gemfile.lock
 
 # Archivos 
 .env
+.env.local
 node_modules/
 dist/
