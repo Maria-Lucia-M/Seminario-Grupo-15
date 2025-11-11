@@ -41,5 +41,6 @@ app.use('/api', vacunaRouter);
 app.use('/api', rescateRoutes);
 app.use('/api', rescatistaRoutes);
 app.use('/api/personas', personaRouter);
+app.use('/api', AltaEntrevistaRoutes);
 
 export default app;
