@@ -12,7 +12,12 @@ import { rescatistaRoutes } from './CRUDS/Rescatista/rescatista.Routes.js';
 import { personaRouter } from './CRUDS/Persona/persona.Routes.js';
 
 //Rutas del sistema:
+<<<<<<< HEAD
 import { seguimientoRouter } from './application/CasosUso/Seguimiento/RegistrarSeguimiento.routes.js';
+=======
+import { RegistrarSeguimientoRoutes } from './application/CasosUso/Seguimiento/RegistrarSeguimiento.routes.js';
+import { AltaEntrevistaRoutes } from './application/CasosUso/CUU5-AltaEntrevista/AltaEntrevista.routes.js';
+>>>>>>> 71db528e4fdee3de264cde3b58e237fbf42ecc95
 
 dotenv.config();
 const app = express();
