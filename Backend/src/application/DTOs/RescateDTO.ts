@@ -1,4 +1,4 @@
-export interface Rescate {
+export interface RescateDTO {
     lugar_rescate: string;
     fecha_rescate: Date;
     nro_animal: number;

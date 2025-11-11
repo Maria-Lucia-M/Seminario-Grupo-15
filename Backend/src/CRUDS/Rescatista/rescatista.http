@@ -1,0 +1,30 @@
+### Obtener todos los rescatistas
+GET http://localhost:3000/api/rescatistas
+
+### Obtener un rescatista por DNI
+GET http://localhost:3000/api/rescatistas/64a7f0c2
+
+### Registrar un nuevo rescatista
+POST http://localhost:3000/api/rescatistas
+Content-Type: application/json
+
+{
+    "dni": 12345678,
+    "nombre": "Juan",
+    "apellido": "Pérez",
+    "telefono": "555-1234"
+}
+
+### Actualizar un rescatista existente por DNI
+PUT http://localhost:3000/api/rescatistas/12345678
+Content-Type: application/json
+
+{
+    "dni": 12345678,
+    "nombre": "Pedro",
+    "apellido": "Pérez",
+    "telefono": "555-1234"
+}
+
+### Eliminar un rescatista por DNI
+DELETE http://localhost:3000/api/rescatistas/12345678

@@ -1,0 +1,8 @@
+###Login de usuario
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+    "email": "ana.actualizada@sara.org",
+    "password": "segura123"
+}

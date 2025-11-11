@@ -1,0 +1,30 @@
+### Obtener todos los rescates
+GET http://localhost:3000/api/rescates
+
+### Obtener un rescate por nro_animal
+GET http://localhost:3000/api/rescates/1
+
+### Registrar un nuevo rescate
+POST http://localhost:3000/api/rescates
+Content-Type: application/json
+
+{
+    "nro_animal": 1,
+    "dni_rescatista": "12345678",
+    "fecha_rescate": "2023-10-10T00:00:00.000Z",
+    "lugar_rescate": "Parque Central"
+}
+
+### Actualizar un rescate existente por nro_animal
+PUT http://localhost:3000/api/rescates/1
+Content-Type: application/json
+
+{
+    "nro_animal": 1,
+    "dni_rescatista": "12345678",
+    "fecha_rescate": "2025-10-10T00:00:00.000Z",
+    "lugar_rescate": "Parque Central"
+}
+
+### Eliminar un rescate por nro_animal
+DELETE http://localhost:3000/api/rescates/1

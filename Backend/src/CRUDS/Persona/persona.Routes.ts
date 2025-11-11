@@ -1,12 +1,16 @@
 import { Router } from 'express';
-import { PersonaController } from './pers.controler';
+import {
+    findAllPersona,
+    getOnePersona,
+    addPersona,
+    updatePersona,
+    removePersona
+} from './persona.controller.js';
 
-const router = Router();
-const personaController = new PersonaController();
+export const personaRouter = Router();
 
-export function setRoutes(app: Router) {
-    app.post('/personas', personaController.createPersona.bind(personaController));
-    app.get('/personas/:dni', personaController.getPersona.bind(personaController));
-    app.put('/personas/:dni', personaController.updatePersona.bind(personaController));
-    app.delete('/personas/:dni', personaController.deletePersona.bind(personaController));
-}
+personaRouter.get('/', findAllPersona);
+personaRouter.get('/:dni', getOnePersona);
+personaRouter.post('/', addPersona);
+personaRouter.put('/:dni', updatePersona);
+personaRouter.delete('/:dni', removePersona);
