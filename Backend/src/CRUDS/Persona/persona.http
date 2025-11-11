@@ -13,7 +13,7 @@ Content-Type: application/json
     "nombre": "Ana",
     "apellido": "Gómez",
     "email": "ana@sara.org",
-    "contraseña": "segura123",
+    "password": "segura123",
     "telefono": "3411234567",
     "veterinario": {
         "matricula": "VET-001",
@@ -28,11 +28,11 @@ POST http://localhost:3000/api/personas
 Content-Type: application/json
 
 {
-    "dni": 87654321,
-    "nombre": "Carlos",
+    "dni": 14587453,
+    "nombre": "David D Carlos",
     "apellido": "Pérez",
-    "email": "carlos@sara.org",
-    "contraseña": "clave456",
+    "email": "carlosDav@sara.org",
+    "password": "clave456",
     "telefono": "3417654321",
     "veterinario": null,
     "adoptante": {
@@ -47,16 +47,16 @@ POST http://localhost:3000/api/personas
 Content-Type: application/json
 
 {
-    "dni": 12345678,
-    "nombre": "Ana",
+    "dni": 14785269,
+    "nombre": "Javier",
     "apellido": "Gómez",
-    "email": "ana@sara.org",
-    "contraseña": "segura123",
+    "email": "javi@sara.org",
+    "password": "segura123",
     "telefono": "3411234567",
     "veterinario": null,
     "adoptante": null,
     "colaborador": {
-        "id_colaborador": "COL-001",
+        "id_colaborador": "COL-001"
     }
 }
 
@@ -70,5 +70,5 @@ Content-Type: application/json
 }
 
 ###DELETE - Eliminar persona por DNI
-DELETE http://localhost:3000/api/personas/12345678
+DELETE http://localhost:3000/api/personas/14587453
 Content-Type: application/json

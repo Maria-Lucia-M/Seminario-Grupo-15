@@ -5,7 +5,7 @@ export class Persona {
     nombre: string;
     apellido: string;
     mail: string;
-    contraseña: string;
+    password: string;
     telefono: string;
     veterinario!: Veterinario | null;
     adoptante!: Adoptante | null;
@@ -16,7 +16,7 @@ export class Persona {
         nombre: string,
         apellido: string,
         mail: string,
-        contraseña: string,
+        password: string,
         telefono: string,
         veterinario: Veterinario | null = null,
         adoptante: Adoptante | null = null,
@@ -26,7 +26,7 @@ export class Persona {
         this.nombre = nombre;
         this.apellido = apellido;
         this.mail = mail;
-        this.contraseña = contraseña;
+        this.password = password;
         this.telefono = telefono;
         this.veterinario = veterinario;
         this.adoptante = adoptante;
