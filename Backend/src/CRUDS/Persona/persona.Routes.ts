@@ -6,10 +6,13 @@ import {
     updatePersona,
     removePersona,
     signupPersona
+    findAdoptantesAptos,
+    findColaboradores 
 } from './persona.controller.js';
 
 export const personaRouter = Router();
-
+personaRouter.get('/adoptantes-aptos', findAdoptantesAptos);
+personaRouter.get('/colaboradores', findColaboradores);
 personaRouter.get('/', findAllPersona);
 personaRouter.get('/:dni', getOnePersona);
 personaRouter.post('/', addPersona);

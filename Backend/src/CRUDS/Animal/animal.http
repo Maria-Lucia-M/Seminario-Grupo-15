@@ -9,10 +9,10 @@ POST http://localhost:3000/api/animales
 Content-Type: application/json
 
 {
-    "nro": 1,
+    "nro": 29,
     "especie": "Perro",
     "raza": "Labrador",
-    "edad_estimada": 3,
+    "edad_estimada": 13,
     "fecha_ingreso": "2023-10-01T00:00:00.000Z",
     "fecha_defuncion": null,
     "estado": "Apto",

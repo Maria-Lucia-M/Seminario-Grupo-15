@@ -28,11 +28,11 @@ POST http://localhost:3000/api/personas
 Content-Type: application/json
 
 {
-    "dni": 14587453,
-    "nombre": "David D Carlos",
+    "dni": 87633,
+    "nombre": "Carlos",
     "apellido": "Pérez",
-    "email": "carlosDav@sara.org",
-    "password": "clave456",
+    "email": "caryys@sara.org",
+    "contraseña": "clave456",
     "telefono": "3417654321",
     "veterinario": null,
     "adoptante": {

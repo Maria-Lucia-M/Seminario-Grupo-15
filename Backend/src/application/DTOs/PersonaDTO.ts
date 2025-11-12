@@ -9,7 +9,7 @@ export interface Adoptante {
 };
 
 export interface Colaborador {
-    id_colaborador: number;
+    id_colaborador: string;
 };
 
 export interface PersonaDTO {

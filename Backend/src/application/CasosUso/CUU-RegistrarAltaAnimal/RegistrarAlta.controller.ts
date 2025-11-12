@@ -1,10 +1,9 @@
 import { Request, Response } from "express";
 import { RegistrarAlta } from "./RegistrarAlta.js";
-import { AltaRepositoryMongo } from "./RegistrarAltaRepositoryMongo.js";
-
+import { AnimalRepositoryMongo } from "../../../CRUDS/Animal/animalRepositoryMongo.js";
 export const RegistrarAltaController = async (req: Request, res: Response):Promise<void> => {
     try{
-        const casoUso = new RegistrarAlta (new AltaRepositoryMongo());
+        const casoUso = new RegistrarAlta (new AnimalRepositoryMongo());
         const resultado = await casoUso.ejecutar(req.body);
         res.status(201).json(resultado);
         return;

@@ -64,6 +64,10 @@ export default function Home() {
                                     Alta de entrevista
                                 </button>
 
+                                <button onClick={() => navigate("/cuu/listar-entrevistas")} className="btn btn-outline-dark btn-lg py-3">
+                                    Listar Entrevistas
+                                </button>
+
                                 <button onClick={() => navigate("/cuu/registrar-seguimiento")} className="btn btn-outline-info btn-lg py-3">
                                     Registrar seguimiento
                                 </button>
