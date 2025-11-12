@@ -5,6 +5,7 @@ import { PersonaModel } from "./personaModel.js";
 import { AdoptanteModel } from "./adoptanteModel.js";
 import { VeterinarioModel } from "./veterinarioModel.js";
 import { ColaboradorModel } from "./colaboradorModel.js";
+import { hashearPassword } from "./hashearPassword.js";
 
 export class PersonaRepositoryMongo implements PersonaRepository {
     async registrarPersona(persona: PersonaDTO): Promise<PersonaDTO> {
@@ -16,6 +17,8 @@ export class PersonaRepositoryMongo implements PersonaRepository {
         } else {
             modelo = new AdoptanteModel({...persona, ...persona.adoptante});
         };
+
+        modelo.password = await hashearPassword(persona.password);
 
         const guardado = await modelo.save();
         const plano = guardado.toObject()as unknown as PersonaDTO;

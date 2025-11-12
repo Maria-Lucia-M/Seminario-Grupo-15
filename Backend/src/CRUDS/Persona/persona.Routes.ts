@@ -5,6 +5,7 @@ import {
     addPersona,
     updatePersona,
     removePersona,
+    signupPersona
     findAdoptantesAptos,
     findColaboradores 
 } from './persona.controller.js';
@@ -17,3 +18,4 @@ personaRouter.get('/:dni', getOnePersona);
 personaRouter.post('/', addPersona);
 personaRouter.put('/:dni', updatePersona);
 personaRouter.delete('/:dni', removePersona);
+personaRouter.post('/signup', signupPersona);
