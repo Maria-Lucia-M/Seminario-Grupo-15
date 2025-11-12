@@ -9,14 +9,14 @@ POST http://localhost:3000/api/personas
 Content-Type: application/json
 
 {
-    "dni": 12345678,
-    "nombre": "Ana",
-    "apellido": "Gómez",
-    "email": "ana@sara.org",
+    "dni": 35581075,
+    "nombre": "Manuel",
+    "apellido": "Ferraris",
+    "email": "ferrarismanu@gmail.com",
     "password": "segura123",
     "telefono": "3411234567",
     "veterinario": {
-        "matricula": "VET-001",
+        "matricula": "VET-002",
         "años_experiencia": "5"
     },
     "adoptante": null,
@@ -47,16 +47,16 @@ POST http://localhost:3000/api/personas
 Content-Type: application/json
 
 {
-    "dni": 14785269,
-    "nombre": "Javier",
-    "apellido": "Gómez",
-    "email": "javi@sara.org",
+    "dni": 14587125,
+    "nombre": "Mariela",
+    "apellido": "Gonzalez",
+    "email": "mari@sara.org",
     "password": "segura123",
     "telefono": "3411234567",
     "veterinario": null,
     "adoptante": null,
     "colaborador": {
-        "id_colaborador": "COL-001"
+        "id_colaborador": "COL-002"
     }
 }
 
@@ -70,5 +70,20 @@ Content-Type: application/json
 }
 
 ###DELETE - Eliminar persona por DNI
-DELETE http://localhost:3000/api/personas/14587453
+DELETE http://localhost:3000/api/personas/34581075
 Content-Type: application/json
+
+### Signup de persona adoptante
+POST http://localhost:3000/api/personas/signup
+Content-Type: application/json
+
+{
+    "dni": 34581075,
+    "nombre": "Manuel",
+    "apellido": "Ferraris",
+    "email": "ferrarismanu2@gmail.com",
+    "telefono": "3411234567",
+    "password": "segura123",
+    "estado": "Apto",
+    "domicilio": "Calle Falsa 123"
+}

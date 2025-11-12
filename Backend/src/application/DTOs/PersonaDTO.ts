@@ -13,6 +13,7 @@ export interface Colaborador {
 };
 
 export interface PersonaDTO {
+    _id?: string;
     dni:number;
     nombre:string;
     apellido:string;
@@ -22,4 +23,5 @@ export interface PersonaDTO {
     veterinario: Veterinario | null;
     adoptante: Adoptante | null;
     colaborador: Colaborador | null;
+    __t?: "Adoptante" | "Colaborador" | "Veterinario" | "Admin";
 };

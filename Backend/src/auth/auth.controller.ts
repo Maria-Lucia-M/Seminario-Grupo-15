@@ -11,6 +11,7 @@ import { RefreshTokenModel } from './refresh-token.entity.js';
 import { FailedLoginRepository } from '../shared/security/failed-login.repository.js';
 import { Adoptante, Colaborador, Veterinario } from '../application/DTOs/PersonaDTO.js';
 import { PersonaRepositoryMongo } from '../CRUDS/Persona/PersonaRepositoryMongo.js';
+import { verifyPasswordResetToken } from './authService.js';
 import redisClient from '../config/redisClient.js';
 
 dotenv.config();
@@ -20,13 +21,20 @@ const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET as string;
 const REFRESH_TOKEN_SECRET = process.env.REFRESH_TOKEN_SECRET as string;
 
 //TypeGuards para verificar los tipos de usuarios
-export function esAdoptante(user: PersonaDTO): user is PersonaDTO & { adoptante: Adoptante} {
-    return user.adoptante ! == null;
-};
-
-export function esTrabajador(user: PersonaDTO): user is PersonaDTO & ({ colaborador: Colaborador } | { veterinario: Veterinario }) {
-    return user.colaborador !== null || user.veterinario !== null;
-};
+export function inferirRol(user: PersonaDTO): string {
+    switch (user.__t) {
+        case "Adoptante":
+            return "Adoptante";
+        case "Colaborador":
+            return "Colaborador";
+        case "Veterinario":
+            return "Veterinario";
+        case "Admin":
+            return "Admin";
+        default:
+            return "Desconocido";
+    }
+}
 
 export const login = async (req: Request, res: Response) => {
     const { email, password} = req.body;
@@ -46,14 +54,14 @@ export const login = async (req: Request, res: Response) => {
 
     const { accessToken, refreshToken, user } = resultado;
     const userData = {
-        id: user._id,
+        id: user.id,
         codigo: user.dni,
         email: user.email,
         nombre: user.nombre,
         apellido: user.apellido,
-        tipoUsuario: esAdoptante(user) ? 'Adoptante' : esTrabajador(user) ? 'Trabajador' : 'Admin'
+        rol: user.rol
     };
-    console.log(`[LOGIN] Usuario ${user.email} (${user.dni}) autenticado como ${userData.tipoUsuario}`);
+    console.log(`[LOGIN] Usuario ${user.email} (${user.dni}) autenticado como ${userData.rol}`);
     return res.status(200).json({ accessToken, refreshToken, user: userData });
 };
 
@@ -136,5 +144,41 @@ export const logout = async (req: Request, res: Response) => {
             console.error('Error inesperado:', error);
             return res.status(500).json({ message: 'Error interno del servidor.' });
         };
+    };
+};
+
+export const validateResetToken = (req: Request, res: Response) => {
+    const { token } = req.query;
+
+    if (!token || typeof token !== 'string') {
+        return res.status(400).json({ message: 'Token requerido' });
+    }
+
+    const email = verifyPasswordResetToken(token);
+    if (!email) {
+        return res.status(400).json({ message: 'Token inválido o expirado' });
+    }
+
+    return res.status(200).json({ message: 'Token válido', email });
+};
+
+export const validateAccessToken = (req:Request, res:Response):void => {
+    const authHeader = req.headers.authorization;
+
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
+        res.status(401).json({ message: "Token no proporcionado" });
+        return;
+    };
+
+    const token = authHeader.split(" ")[1];
+
+    try {
+        const decoded = jwt.verify(token, ACCESS_TOKEN_SECRET);
+        res.status(200).json({ valid: true, user: decoded });
+        //console.log("El famoso decoded en validate token: ", decoded);
+        return
+    } catch (error) {
+        res.status(401).json({ message: "Token inválido o expirado" });
+        return;
     };
 };

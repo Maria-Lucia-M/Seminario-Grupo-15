@@ -1,9 +1,35 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Navigate } from 'react-router-dom';
+import { useAuth } from '../auth/useAuth.ts';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
 export default function Home() {
     const navigate = useNavigate();
+    const auth = useAuth();
+    const user = auth.user;
+
+    if (auth.isLoading) {
+        return <div>Cargando sesión...</div>;
+    };
+
+    console.log(`[Home] Usuario autenticado: ${user?.email} como ${user?.rol}`);
+    if (!auth.isAuthenticated || !user) {
+        console.log("[Home] Usuario no autenticado, redirigiendo a /login");
+        return <Navigate to="/login" replace />;
+    };
+
+    const handleLogout = () => {
+        localStorage.removeItem("accessToken");
+        sessionStorage.removeItem("accessToken");
+        localStorage.removeItem("user");
+        sessionStorage.removeItem("accessToken");
+        try{
+            auth.logout();
+            navigate('/login', { replace: true });
+        } catch(error){
+            console.error("Error en el logout:", error);
+        };
+    }
 
     return (
         <div className="container py-5">
@@ -44,6 +70,10 @@ export default function Home() {
 
                                 <button onClick={() => navigate("/cuu/aprobar-entrevista")} className="btn btn-outline-dark btn-lg py-3">
                                     Aprobar entrevista
+                                </button>
+
+                                <button onClick={handleLogout} className="btn btn-danger btn-lg py-3 mt-4">
+                                    Cerrar Sesión
                                 </button>
 
                             </div>

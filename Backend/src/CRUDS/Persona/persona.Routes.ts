@@ -4,7 +4,8 @@ import {
     getOnePersona,
     addPersona,
     updatePersona,
-    removePersona
+    removePersona,
+    signupPersona
 } from './persona.controller.js';
 
 export const personaRouter = Router();
@@ -14,3 +15,4 @@ personaRouter.get('/:dni', getOnePersona);
 personaRouter.post('/', addPersona);
 personaRouter.put('/:dni', updatePersona);
 personaRouter.delete('/:dni', removePersona);
+personaRouter.post('/signup', signupPersona);

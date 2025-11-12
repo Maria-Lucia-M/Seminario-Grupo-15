@@ -1,11 +1,12 @@
 import { Request, Response } from 'express';
-import { Persona } from './per.entity';
 import { PersonaRepositoryMongo } from './PersonaRepositoryMongo.js';
 import { ListarPersonas } from './metodos/ListarPersona.js';
 import { BuscarPersona } from './metodos/BuscarPersona.js';
 import { RegistrarPersona } from './metodos/RegistrarPersona.js';
 import { ActualizarPersona } from './metodos/ActualizarPersona.js';
 import { EliminarPersona } from './metodos/EliminarPersona.js';
+import { TokenService } from '../../application/tokenService.js';
+import { SignUp } from './metodos/Signup.js';
 
 const repo = new PersonaRepositoryMongo();
 
@@ -93,6 +94,33 @@ export const removePersona = async (req: Request, res: Response): Promise<void> 
         return;
     } catch (error) {
         console.error('Error al eliminar persona:', error);
+        res.status(500).json({ message: 'Error interno del servidor' });
+        return;
+    };
+};
+
+export const signupPersona = async (req: Request, res: Response): Promise<void> => {
+    try{
+        const repo = new PersonaRepositoryMongo();
+        const casoUso = new SignUp(repo);
+
+        const resultado = await casoUso.ejecutar(req.body);
+
+        if (Array.isArray(resultado)) {
+            res.status(400).json({ errores: resultado });
+            return;
+        };
+
+        const { accessToken, refreshToken } = TokenService.generarTokens(resultado);
+
+        res.status(201).json({
+            message: "Usuario dado de alta!",
+            accessToken,
+            refreshToken,
+            data: { ...resultado, password: undefined },
+        });
+    }catch(error){
+        console.error('Error al registrar un adoptante en el signup:', error);
         res.status(500).json({ message: 'Error interno del servidor' });
         return;
     };

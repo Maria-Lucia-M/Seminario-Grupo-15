@@ -1,0 +1,13 @@
+.error {
+    border: 1px solid red;
+}
+
+.error-message {
+    color: red;
+    font-size: 0.8rem;
+    margin-top: 0.25rem;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
