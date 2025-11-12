@@ -1,0 +1,7 @@
+@baseUrl = http://localhost:3000/api
+
+### Listar TODAS las entrevistas
+GET {{baseUrl}}/entrevistas
+
+### Obtener UNA entrevista
+GET {{baseUrl}}/entrevistas/69138849bebd68731faf893d

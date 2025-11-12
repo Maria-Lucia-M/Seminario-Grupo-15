@@ -6,6 +6,8 @@ import { BuscarPersona } from './metodos/BuscarPersona.js';
 import { RegistrarPersona } from './metodos/RegistrarPersona.js';
 import { ActualizarPersona } from './metodos/ActualizarPersona.js';
 import { EliminarPersona } from './metodos/EliminarPersona.js';
+import { AdoptanteModel } from './adoptanteModel.js';
+import { ColaboradorModel } from './colaboradorModel.js';
 
 const repo = new PersonaRepositoryMongo();
 
@@ -96,4 +98,27 @@ export const removePersona = async (req: Request, res: Response): Promise<void> 
         res.status(500).json({ message: 'Error interno del servidor' });
         return;
     };
+};
+
+
+export const findAdoptantesAptos = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const adoptantes = await AdoptanteModel.find({ estado: 'Apto' }); 
+
+        res.status(200).json(adoptantes.map(a => a.toObject()));
+    } catch (error) {
+        console.error('Error al buscar adoptantes aptos:', error);
+        res.status(500).json({ message: 'Error interno del servidor' });
+    }
+};
+
+export const findColaboradores = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const colaboradores = await ColaboradorModel.find(); 
+
+        res.status(200).json(colaboradores.map(c => c.toObject()));
+    } catch (error) {
+        console.error('Error al buscar colaboradores:', error);
+        res.status(500).json({ message: 'Error interno del servidor' });
+    }
 };
