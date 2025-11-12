@@ -9,19 +9,20 @@ POST http://localhost:3000/api/vacunas
 Content-Type: application/json
 
 {
-    "nro_vacuna": 2,
-    "fecha_vencimiento": "2026-05-01",
+    "nro_vacuna": 1,
+    "fecha_vencimiento": "2026-01-01",
+    "nombre": "VacunaH1N1",
     "droga": [
         {
-            "nombre": "DrogaC",
-            "descripcion": "Descripcion de DrogaC"
+            "nombre": "DrogaA",
+            "descripcion": "Descripcion de DrogaA"
         },
         {
-            "nombre": "DrogaD",
-            "descripcion": "Descripcion de DrogaD"
+            "nombre": "DrogaB",
+            "descripcion": "Descripcion de DrogaB"
         }
     ],
-    "stock": 50,
+    "stock": 10,
     "fecha_ingreso": "2025-06-15"
 }
 

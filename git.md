@@ -13,3 +13,6 @@ git pull #trae los cambios
 git add .
 git commit -m "Descripcion de los cambios"
 git push
+
+correr front: pnpm start
+correr back: pnpm start:dev

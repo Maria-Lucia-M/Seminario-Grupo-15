@@ -6,7 +6,9 @@ import HomeAdoptante from './pages/Adoptante/HomeAdoptante.tsx';
 import Login from './pages/Login/Login.tsx';
 import Signup from './pages/Signup/Signup.tsx';
 
+
 //Rutas casos de uso
+import ColocacionVacunas from './pages/CUU4/ColocVacunas.tsx';
 import RegistrarSeguimiento from './pages/CUU-Seguimiento/SeguimientoPage';
 
 //Rutas CRUDs
@@ -26,7 +28,7 @@ function App() {
       
       {/* Rutas CUU */}
       <Route path="/cuu/registrar-seguimiento" element={<RegistrarSeguimiento />} />
-      
+      <Route path="/cuu/colocacion-vacunas" element={<ColocacionVacunas />} />
       {/* otras rutas */}
     </Routes>
   );
