@@ -149,4 +149,73 @@ export const findAdoptantesAptos = async (req: Request, res: Response): Promise<
             res.status(500).json({ message: 'Error interno del servidor' });
         }
     };
+
+// Funciones para gestión de lista negra
+export const findAdoptantesListaNegra = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const adoptantesListaNegra = await AdoptanteModel.find({ enListaNegra: true });
+        res.status(200).json(adoptantesListaNegra.map(a => a.toObject()));
+    } catch (error) {
+        console.error('Error al buscar adoptantes en lista negra:', error);
+        res.status(500).json({ message: 'Error interno del servidor' });
+    }
+};
+
+export const agregarAListaNegra = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const dni = Number(req.params.dni);
+        const adoptante = await AdoptanteModel.findOneAndUpdate(
+            { dni: dni },
+            { enListaNegra: true },
+            { new: true }
+        );
+
+        if (!adoptante) {
+            res.status(404).json({ message: 'Adoptante no encontrado' });
+            return;
+        }
+
+        res.status(200).json({ 
+            message: 'Adoptante agregado a lista negra', 
+            data: adoptante.toObject() 
+        });
+    } catch (error) {
+        console.error('Error al agregar adoptante a lista negra:', error);
+        res.status(500).json({ message: 'Error interno del servidor' });
+    }
+};
+
+export const quitarDeListaNegra = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const dni = Number(req.params.dni);
+        const adoptante = await AdoptanteModel.findOneAndUpdate(
+            { dni: dni },
+            { enListaNegra: false },
+            { new: true }
+        );
+
+        if (!adoptante) {
+            res.status(404).json({ message: 'Adoptante no encontrado' });
+            return;
+        }
+
+        res.status(200).json({ 
+            message: 'Adoptante removido de lista negra', 
+            data: adoptante.toObject() 
+        });
+    } catch (error) {
+        console.error('Error al quitar adoptante de lista negra:', error);
+        res.status(500).json({ message: 'Error interno del servidor' });
+    }
+};
+
+export const findTodosAdoptantes = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const adoptantes = await AdoptanteModel.find();
+        res.status(200).json(adoptantes.map(a => a.toObject()));
+    } catch (error) {
+        console.error('Error al buscar todos los adoptantes:', error);
+        res.status(500).json({ message: 'Error interno del servidor' });
+    }
+};
     

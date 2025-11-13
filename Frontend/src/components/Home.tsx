@@ -9,14 +9,14 @@ export default function Home() {
     const user = auth.user;
 
     if (auth.isLoading) {
-        return <div>Cargando sesión...</div>;
-    };
+        return <div>Cargando sesión...</div>
+    }
 
-    console.log(`[Home] Usuario autenticado: ${user?.email} como ${user?.rol}`);
+    console.log(`[Home] Usuario autenticado: ${user?.email} como ${user?.rol}`)
     if (!auth.isAuthenticated || !user) {
-        console.log("[Home] Usuario no autenticado, redirigiendo a /login");
-        return <Navigate to="/login" replace />;
-    };
+        console.log("[Home] Usuario no autenticado, redirigiendo a /login")
+        return <Navigate to="/login" replace />
+    }
 
     const handleLogout = () => {
         localStorage.removeItem("accessToken");
@@ -28,7 +28,7 @@ export default function Home() {
             navigate('/login', { replace: true });
         } catch(error){
             console.error("Error en el logout:", error);
-        };
+        }
     }
 
     return (
@@ -86,5 +86,5 @@ export default function Home() {
                 </div>
             </div>
         </div>
-    );
+    )
 }

@@ -13,6 +13,7 @@ import { IngresoRescatista } from './pages/CUU-Rescate/ingresoRescatista.tsx';
 import { RegistrarRescate } from './pages/CUU-Rescate/registrarRescate.tsx';
 import PanelAdmin from './pages/Administrador/panelAdmin.tsx';
 import { PrivateRoute } from './pages/Administrador/PrivateRoutes.tsx';
+import ListaNegraPage from './pages/CUU-ListaNegra/ListaNegraPage.tsx';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
       <Route path="/cuu/alta-entrevista" element={<AltaEntrevistaPage />} />
       <Route path="/cuu/listar-entrevistas" element={<EntrevistaListPage />} />
       <Route path="/cuu/registro-animal" element={<AltaAnimal />} />
+      <Route path="/cuu/lista-negra" element={<ListaNegraPage />} />
 
       {/* Solo administrador */}
       <Route

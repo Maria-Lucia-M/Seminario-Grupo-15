@@ -6,6 +6,7 @@ export interface Veterinario {
 export interface Adoptante {
     estado:'Apto' | 'No apto';
     domicilio: string;
+    enListaNegra: boolean;
 };
 
 export interface Colaborador {

@@ -1,0 +1,242 @@
+.lista-negra-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.lista-negra-container h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 30px;
+  font-size: 2.5rem;
+}
+
+.lista-negra-container h2 {
+  color: #444;
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+}
+
+/* Mensajes */
+.mensaje {
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mensaje.success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.mensaje.error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+.mensaje button {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: inherit;
+  font-weight: bold;
+}
+
+/* Botones de navegación */
+.botones-navegacion {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
+  justify-content: center;
+}
+
+.botones-navegacion button {
+  padding: 12px 24px;
+  border: 2px solid #007bff;
+  background-color: white;
+  color: #007bff;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.botones-navegacion button:hover {
+  background-color: #f8f9fa;
+  transform: translateY(-2px);
+}
+
+.botones-navegacion button.activo {
+  background-color: #007bff;
+  color: white;
+}
+
+/* Tabla */
+.tabla-container {
+  overflow-x: auto;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  background-color: white;
+}
+
+.tabla-adoptantes {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 800px;
+}
+
+.tabla-adoptantes thead {
+  background-color: #f8f9fa;
+}
+
+.tabla-adoptantes th {
+  padding: 15px 12px;
+  text-align: left;
+  font-weight: 600;
+  color: #495057;
+  border-bottom: 2px solid #dee2e6;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.tabla-adoptantes td {
+  padding: 12px;
+  border-bottom: 1px solid #dee2e6;
+  color: #495057;
+}
+
+.tabla-adoptantes tbody tr:hover {
+  background-color: #f8f9fa;
+}
+
+.tabla-adoptantes tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Estados */
+.estado {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.estado.apto {
+  background-color: #d4eedd;
+  color: #155724;
+}
+
+.estado.no-apto {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+/* Botones de acción */
+.btn-agregar, .btn-quitar {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-agregar {
+  background-color: #dc3545;
+  color: white;
+}
+
+.btn-agregar:hover {
+  background-color: #c82333;
+  transform: translateY(-1px);
+}
+
+.btn-quitar {
+  background-color: #28a745;
+  color: white;
+}
+
+.btn-quitar:hover {
+  background-color: #218838;
+  transform: translateY(-1px);
+}
+
+/* Sin datos */
+.sin-datos {
+  text-align: center;
+  color: #6c757d;
+  font-style: italic;
+  padding: 40px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  margin: 20px 0;
+}
+
+/* Loading */
+.loading {
+  text-align: center;
+  font-size: 18px;
+  color: #007bff;
+  padding: 40px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .lista-negra-container {
+    padding: 10px;
+  }
+  
+  .lista-negra-container h1 {
+    font-size: 2rem;
+  }
+  
+  .botones-navegacion {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .botones-navegacion button {
+    width: 200px;
+  }
+  
+  .tabla-container {
+    font-size: 14px;
+  }
+  
+  .tabla-adoptantes th,
+  .tabla-adoptantes td {
+    padding: 8px 6px;
+  }
+  
+  .btn-agregar, .btn-quitar {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .lista-negra-container h1 {
+    font-size: 1.5rem;
+  }
+  
+  .tabla-container {
+    font-size: 12px;
+  }
+  
+  .tabla-adoptantes th,
+  .tabla-adoptantes td {
+    padding: 6px 4px;
+  }
+}
