@@ -48,7 +48,7 @@ export default function Home() {
                                     Registro alta de animal
                                 </button>
 
-                                <button onClick={() => navigate("/cuu/rescate")} className="btn btn-outline-primary btn-lg py-3">
+                                <button onClick={() => navigate("/cuu/valida-rescatista")} className="btn btn-outline-primary btn-lg py-3">
                                     Registrar rescate animal
                                 </button>
 

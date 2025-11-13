@@ -13,6 +13,9 @@ import RegistrarSeguimiento from './pages/CUU-Seguimiento/SeguimientoPage';
 import AltaEntrevistaPage from './pages/CUU5-AltaEntrevista/AltaEntrevistaPage';
 import EntrevistaListPage from './pages/CUU5-AltaEntrevista/ListarEntrevistas'; 
 import AltaAnimal from './pages/CUU1-AltaAnimal/AltaPage.tsx';
+import { ValidaRescatista } from './pages/CUU-Rescate/validaRescatista.tsx';
+import { IngresoRescatista } from './pages/CUU-Rescate/ingresoRescatista.tsx';
+import { RegistrarRescate } from './pages/CUU-Rescate/registrarRescate.tsx';
 
 //Rutas CRUDs
 //Agueguen aca...
@@ -31,6 +34,9 @@ function App() {
       
       {/* Rutas CUU */}
       <Route path="/cuu/registrar-seguimiento" element={<RegistrarSeguimiento />} />
+      <Route path="/cuu/valida-rescatista" element={<ValidaRescatista />} />
+      <Route path="/cuu/ingreso-rescatista" element={<IngresoRescatista />} />
+      <Route path="/cuu/rescate" element={<RegistrarRescate />} />
       <Route path="/cuu/colocacion-vacunas" element={<ColocacionVacunas />} />
       <Route path="/cuu/alta-entrevista" element={<AltaEntrevistaPage />} />
       <Route path="/cuu/listar-entrevistas" element={<EntrevistaListPage />} />
