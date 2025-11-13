@@ -1,12 +1,13 @@
 import { AnimalDTO } from "../../DTOs/AnimalDTO.js";
-import { AnimalRepository } from "../../interfaces/AnimalRepository.js";
+import { AnimalRepositoryMongo } from "../../../CRUDS/Animal/animalRepositoryMongo.js";
 
 export class RegistrarAlta {
-    constructor(private readonly repo: AnimalRepository) {};
+    constructor(private readonly repo: AnimalRepositoryMongo) {}
 
     async ejecutar(dto: AnimalDTO): Promise<AnimalDTO | string[]> {
         const errores: string[] = [];
-        // Validar datos requeridos
+
+        // Validación de datos requeridos
         if (
             !dto.nro ||
             !dto.especie ||
@@ -17,15 +18,15 @@ export class RegistrarAlta {
         ) {
             errores.push("Datos incompletos para registrar alta de animal");
             return errores;
-        };
+        }
 
-        // Cambiar estado a 'Apto' si estaba 'No Apto'
+        // Si el animal estaba "No apto", se cambia a "Apto"
         if (dto.estado === "No apto") {
             dto.estado = "Apto";
-        };
+        }
 
-        // Registrar el alta en el repositorio
+        // Registrar en Mongo
         const animalRegistrado = await this.repo.registrar(dto);
         return animalRegistrado;
-    };
-};
+    }
+}

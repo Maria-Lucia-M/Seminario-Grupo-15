@@ -39,6 +39,9 @@ importers:
       '@types/express':
         specifier: ^5.0.3
         version: 5.0.3
+      '@types/express-serve-static-core':
+        specifier: ^5.1.0
+        version: 5.1.0
       '@types/ioredis':
         specifier: ^4.28.10
         version: 4.28.10

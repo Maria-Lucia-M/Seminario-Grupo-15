@@ -126,25 +126,27 @@ export const signupPersona = async (req: Request, res: Response): Promise<void> 
         res.status(500).json({ message: 'Error interno del servidor' });
         return;
     };
+};
 
 export const findAdoptantesAptos = async (req: Request, res: Response): Promise<void> => {
     try {
         const adoptantes = await AdoptanteModel.find({ estado: 'Apto' }); 
 
-        res.status(200).json(adoptantes.map(a => a.toObject()));
-    } catch (error) {
-        console.error('Error al buscar adoptantes aptos:', error);
-        res.status(500).json({ message: 'Error interno del servidor' });
-    }
-};
+            res.status(200).json(adoptantes.map(a => a.toObject()));
+        } catch (error) {
+            console.error('Error al buscar adoptantes aptos:', error);
+            res.status(500).json({ message: 'Error interno del servidor' });
+        }
+    };
 
-export const findColaboradores = async (req: Request, res: Response): Promise<void> => {
-    try {
-        const colaboradores = await ColaboradorModel.find(); 
+    export const findColaboradores = async (req: Request, res: Response): Promise<void> => {
+        try {
+            const colaboradores = await ColaboradorModel.find(); 
 
-        res.status(200).json(colaboradores.map(c => c.toObject()));
-    } catch (error) {
-        console.error('Error al buscar colaboradores:', error);
-        res.status(500).json({ message: 'Error interno del servidor' });
-    }
-};
+            res.status(200).json(colaboradores.map(c => c.toObject()));
+        } catch (error) {
+            console.error('Error al buscar colaboradores:', error);
+            res.status(500).json({ message: 'Error interno del servidor' });
+        }
+    };
+    

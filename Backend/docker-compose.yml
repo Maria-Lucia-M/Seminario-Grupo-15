@@ -1,24 +1,48 @@
-version: '3.8'
-
 services:
-  mongo:
+  sara_backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: sara_backend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongo_db
+      - redis_cache
+    environment:
+      - MONGO_URI=mongodb://mongo_db:27017/Sara
+      - REDIS_HOST=redis_cache
+      - REDIS_PORT=6379
+    volumes:
+      - ./backend:/app
+    command: ["pnpm", "start:dev"]
+
+  sara_frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: sara_frontend
+    ports:
+      - "5173:5173"
+    depends_on:
+      - sara_backend
+    volumes:
+      - ./frontend:/app
+    command: ["pnpm", "start"]
+
+  mongo_db:
     image: mongo:6
     container_name: mongo_db
     ports:
       - "27017:27017"
     volumes:
       - mongo_data:/data/db
-    environment:
-      MONGO_INITDB_DATABASE: mydatabase
 
-  redis:
+  redis_cache:
     image: redis:7
     container_name: redis_cache
     ports:
       - "6379:6379"
-    volumes:
-      - redis_data:/data
 
 volumes:
   mongo_data:
-  redis_data:

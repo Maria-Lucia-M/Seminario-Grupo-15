@@ -1,9 +1,32 @@
-POST http://localhost:3000/api/seguimientos
-Content-Type: application/json
-
-{
+[
+  {
     "nro_adopcion": 1,
-    "fecha_seguimiento": "2024-10-10",
-    "entorno": "Ambiente familiar adecuado",
+    "fecha_seguimiento": "2024-11-01",
+    "entorno": "Vive en casa con jardín amplio, buena alimentación.",
+    "estado_animal": "Apto"
+  },
+  {
+    "nro_adopcion": 2,
+    "fecha_seguimiento": "2024-09-15",
+    "entorno": "Departamento pequeño, sale poco al exterior.",
     "estado_animal": "No apto"
-}
+  },
+  {
+    "nro_adopcion": 3,
+    "fecha_seguimiento": "2024-12-20",
+    "entorno": "Convive con otros animales, entorno saludable.",
+    "estado_animal": "Apto"
+  },
+  {
+    "nro_adopcion": 4,
+    "fecha_seguimiento": "2024-10-05",
+    "entorno": "Zona rural, buena condición física y comportamiento estable.",
+    "estado_animal": "Apto"
+  },
+  {
+    "nro_adopcion": 5,
+    "fecha_seguimiento": "2024-08-12",
+    "entorno": "Ambiente con niños, presenta estrés leve.",
+    "estado_animal": "No apto"
+  }
+]

@@ -1,11 +1,22 @@
 import { AnimalDTO } from "../../DTOs/AnimalDTO.js";
-import { AnimalRepository } from "../../interfaces/AnimalRepository.js";
-import { AnimalModel } from "./AltaAnimal.js";
+import { AnimalRepositoryMongo } from "../../../CRUDS/Animal/animalRepositoryMongo.js";
+export class RegistrarAltaRepositoryMongo {
+    private readonly repo: AnimalRepositoryMongo;
 
-export class AltaRepositoryMongo {
-    async registrar(dto: AnimalDTO): Promise<AnimalDTO>{
-        const alta = new AnimalModel(dto);
-        const guardado = await alta.save();
-        return guardado.toObject();
-    };
-};
+    constructor() {
+        this.repo = new AnimalRepositoryMongo();
+    }
+
+    async registrar(dto: AnimalDTO): Promise<AnimalDTO> {
+        const animalRegistrado = await this.repo.registrar(dto);
+        return animalRegistrado;
+    }
+
+    async buscarPorNro(nro: number): Promise<AnimalDTO | null> {
+        return await this.repo.buscarPorNro(nro);
+    }
+
+    async actualizar(nro: number, dto: Partial<AnimalDTO>): Promise<AnimalDTO | null> {
+        return await this.repo.actualizar(nro, dto);
+    }
+}

@@ -5,7 +5,7 @@ import {
     addPersona,
     updatePersona,
     removePersona,
-    signupPersona
+    signupPersona,
     findAdoptantesAptos,
     findColaboradores 
 } from './persona.controller.js';
