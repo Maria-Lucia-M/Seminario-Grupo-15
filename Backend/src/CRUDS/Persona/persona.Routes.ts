@@ -1,4 +1,5 @@
 import { Router } from 'express';
+<<<<<<< HEAD
 import {
     findAllPersona,
     getOnePersona,
@@ -13,6 +14,9 @@ import {
     quitarDeListaNegra,
     findTodosAdoptantes
 } from './persona.controller.js';
+=======
+import { PersonaController } from './pers.controler.js';
+>>>>>>> 7dd6bb806760a13fc91f63e65ced966d092e8bba
 
 export const personaRouter = Router();
 personaRouter.get('/adoptantes-aptos', findAdoptantesAptos);

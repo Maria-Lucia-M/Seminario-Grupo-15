@@ -1,5 +1,6 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import HomePage from './pages/HomePage';
+<<<<<<< HEAD
 import HomeAdoptante from './pages/Adoptante/HomeAdoptante.tsx';
 import Login from './pages/Login/Login.tsx';
 import Signup from './pages/Signup/Signup.tsx';
@@ -14,10 +15,14 @@ import { RegistrarRescate } from './pages/CUU-Rescate/registrarRescate.tsx';
 import PanelAdmin from './pages/Administrador/panelAdmin.tsx';
 import { PrivateRoute } from './pages/Administrador/PrivateRoutes.tsx';
 import ListaNegraPage from './pages/CUU-ListaNegra/ListaNegraPage.tsx';
+=======
+import ListaNegraPage from './pages/ListaNegraPage';
+>>>>>>> 7dd6bb806760a13fc91f63e65ced966d092e8bba
 
 function App() {
   return (
     <Routes>
+<<<<<<< HEAD
       <Route path="/" element={<Navigate to="/login" replace />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
@@ -46,6 +51,11 @@ function App() {
           </PrivateRoute>
         }
       />
+=======
+      <Route path="/" element={<HomePage />} />
+      <Route path="/cuu/lista-negra" element={<ListaNegraPage />} />
+      {/* otras rutas */}
+>>>>>>> 7dd6bb806760a13fc91f63e65ced966d092e8bba
     </Routes>
   );
 }
