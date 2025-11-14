@@ -1,5 +1,5 @@
 export interface RescatistaDTO {
-    dni: number;
+    dni: string;
     nombre: string;
     apellido: string;
     telefono: string;
