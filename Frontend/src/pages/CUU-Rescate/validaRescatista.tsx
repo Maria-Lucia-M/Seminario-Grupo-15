@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { API_URL } from "../../rutasGenericas";
+import { useRescatista } from "../../rescatista/useRescatista";
 import axios from "axios";
 import './formulario.css';
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -8,11 +9,18 @@ import "bootstrap/dist/css/bootstrap.min.css";
 export function ValidaRescatista() {
   const [dni, setDni] = useState("");
   const navigate = useNavigate();
+  const {setRescatista}=useRescatista();
   const enviarFormulario = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       const respuesta = await axios.get(`${API_URL}/rescatistas/${dni}`);
       if (respuesta.data) {
+        setRescatista({
+          dni: respuesta.data.data.dni,
+          nombre: respuesta.data.data.nombre,
+          apellido: respuesta.data.data.apellido,
+          telefono: respuesta.data.data.telefono
+        });
         alert('Rescatista validado con exito!');
         navigate("/cuu/rescate")
       } else {
