@@ -16,3 +16,8 @@ Formato: `<tipo>/<objetivo-claro>`
 - `fix/login-auth`
 - `refactor/login-handler`
 - `feature/crud-animal`
+
+## Usuario Admin
+email: admin@sistemarefugio.com
+password: admin123
+rol (detectado por tu sistema): Admin

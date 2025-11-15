@@ -22,3 +22,4 @@ Content-Type: application/json
 {
     "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MTFiOTdlMmEyMWNmNzhjM2JiNmE1YiIsIkROSSI6MTIzNDU2NzgsImVtYWlsIjoiYW5hLmFjdHVhbGl6YWRhQHNhcmEub3JnIiwibm9tYnJlIjoiQW5hIiwiYXBlbGxpZG8iOiJHw7NtZXoiLCJyb2wiOiJBZG9wdGFudGUiLCJpYXQiOjE3NjI4OTU1ODcsImV4cCI6MTc2MzUwMDM4N30.yQWzogDFOkmifCnLcJI1jDQtGdCb8E6937wOG4LyHeA"
 }
+###Usuario admin para pruebas

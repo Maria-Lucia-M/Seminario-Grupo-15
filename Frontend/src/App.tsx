@@ -14,6 +14,15 @@ import { RegistrarRescate } from './pages/CUU-Rescate/registrarRescate.tsx';
 import { CargaProvisoriaAnimal } from './pages/CUU-Rescate/cargaProvisoriaAnimal.tsx';
 import PanelAdmin from './pages/Administrador/panelAdmin.tsx';
 import { PrivateRoute } from './pages/Administrador/PrivateRoutes.tsx';
+import { createInitialAdmin } from '../../Backend/src/auth/createInitialAdmin.js';
+import mongoose from 'mongoose';
+
+// Conexión a MongoDB (asegúrate de que la URL sea correcta)
+mongoose.connection.once("open", async () => {
+    console.log("MongoDB conectado");
+    await createInitialAdmin(); // 👈 SE CREA EL ADMIN AUTOMÁTICO
+});
+
 
 function App() {
   return (
