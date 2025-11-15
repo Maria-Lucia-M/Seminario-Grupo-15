@@ -1,24 +1,16 @@
 import React, { useState } from "react";
 import { AnimalContext } from "./animalContext.ts";
 
-interface Estado {
-  apto: boolean;
-  no_apto: boolean;
-  en_adopcion: boolean;
-  adoptado: boolean;
-  disponible: boolean;
-  no_disponible: boolean;
-}
-
 interface Animal {
-  nro: string;
+  nro: number;
+  especie: string
   raza: string;
-  edad_estimada: string;
-  fecha_ingreso: string;
-  fecha_defuncion: string | null;
-  estado: Estado;
-  imagen: string[];
-  video: string[];
+  edad_estimada: number;
+  fecha_ingreso: Date;
+  fecha_defuncion: Date | null;
+  estado: string;
+  imagen: string[] | null;
+  video: string[] | null;
   vacunas?: string[];
 };
 

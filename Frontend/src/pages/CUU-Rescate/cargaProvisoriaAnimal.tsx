@@ -41,6 +41,11 @@ export function CargaProvisoriaAnimal() {
     e.preventDefault();
     setError("");
 
+  if (!animal) {
+    setError("No hay datos del animal cargados. Volvé a Registrar Rescate.");
+    return;
+  }
+
     if (edad_estimada === "" || edad_estimada < 0 || edad_estimada > 30) {
       setError("La edad estimada debe estar entre 0 y 30 años");
       return;
@@ -50,22 +55,24 @@ export function CargaProvisoriaAnimal() {
       return;
     }
 
-    if (animal){
     try {
       await axios.post(`${API_URL}/animales`, {
         nro: animal.nro,
         especie,
         raza,
         edad_estimada,
-        fecha_ingreso: new Date().toISOString(),
-        estado: "No apto"
+        fecha_ingreso: new Date(),
+        fecha_defuncion: null,
+        estado: "No apto",
+        imagen: [],
+        video: []
       });
       alert('Animal rescatado registrado con exito!');
       navigate("/trabajadores/homePage")
     } catch (error) {
       console.error('Error registrando animal rescatado:', error);
       alert('Error registrando animal rescatado...');
-    }}
+    }
   };
 
   return (
