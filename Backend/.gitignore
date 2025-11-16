@@ -22,4 +22,3 @@ Gemfile.lock
 .env.local
 node_modules/
 dist/
-.env.local

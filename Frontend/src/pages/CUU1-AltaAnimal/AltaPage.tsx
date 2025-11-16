@@ -2,16 +2,16 @@ import { useEffect, useState, type ChangeEvent } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { API_URL } from "../../rutasGenericas";
+import { API_URL } from "../../rutasGenericas"; // Asumiendo que esta importación es correcta
 
-interface Estado {
-  apto: boolean;
-  no_apto: boolean;
-  en_adopcion: boolean;
-  adoptado: boolean;
-  disponible: boolean;
-  no_disponible: boolean;
-}
+// Definición de tipos de estado válidos
+type EstadoAnimal = 
+  | "Apto" 
+  | "No apto" 
+  | "Disponible" 
+  | "No disponible" 
+  | "Adoptado" 
+  | "En Adopción";
 
 interface Animal {
   nro: string;
@@ -19,7 +19,8 @@ interface Animal {
   edad_estimada: string;
   fecha_ingreso: string;
   fecha_defuncion: string | null;
-  estado: Estado;
+  // CORRECCIÓN 1: La propiedad estado es ahora un string simple
+  estado: EstadoAnimal; 
   imagen: string[];
   video: string[];
   vacunas?: string[];
@@ -27,13 +28,14 @@ interface Animal {
 
 export default function AltaAnimal() {
   const [animales, setAnimales] = useState<Animal[]>([]);
-  const [filtroEstado, setFiltroEstado] = useState<string>("");
+  // CORRECCIÓN 2: El filtro también debe ser un string que coincida con el valor del estado
+  const [filtroEstado, setFiltroEstado] = useState<EstadoAnimal | "">("");
 
   // Cargar animales desde el backend
   useEffect(() => {
     const fetchAnimales = async () => {
       try {
-        const { data } = await axios.get(`${API_URL}/animales`);
+        const { data } = await axios.get<Animal[]>(`${API_URL}/animales`);
         setAnimales(data);
       } catch {
         Swal.fire("Error", "No se pudieron cargar los animales", "error");
@@ -43,17 +45,22 @@ export default function AltaAnimal() {
   }, []);
 
   const handleFiltroChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setFiltroEstado(e.target.value);
+    // CORRECCIÓN 3: Asegurar que el valor del select sea un estado válido o un string vacío
+    setFiltroEstado(e.target.value as EstadoAnimal | "");
   };
 
+  // CORRECCIÓN 4: Lógica de filtrado simple usando el string del estado
   const filtrarAnimales = () => {
     if (!filtroEstado) return animales;
-    return animales.filter((a) => a.estado[filtroEstado as keyof Estado]);
+    return animales.filter((a) => a.estado === filtroEstado);
   };
 
+  // CORRECCIÓN 5: Lógica de selección para el pop-up (lo cambiaste de "entrevista" a "adaptación")
   const handleSeleccionarAnimal = async (animal: Animal) => {
-    if (!animal.estado.no_apto) return;
-
+    // El pop-up solo debe saltar si el estado actual es "No apto"
+    if (animal.estado !== "No apto") return; 
+    
+    // Aquí es donde salta el pop-up de "período de adaptación"
     const { isConfirmed } = await Swal.fire({
       title: "¿Terminó su período de adaptación?",
       icon: "question",
@@ -70,14 +77,7 @@ export default function AltaAnimal() {
     if (tieneVacunas && noFallecido) {
       const actualizado: Animal = {
         ...animal,
-        estado: {
-          apto: true,
-          no_apto: false,
-          en_adopcion: false,
-          adoptado: false,
-          disponible: false,
-          no_disponible: false,
-        },
+        estado: "Apto", // Cambia el estado a Apto si se cumplen las condiciones
       };
 
       try {
@@ -92,7 +92,7 @@ export default function AltaAnimal() {
     } else {
       Swal.fire(
         "Condiciones no cumplidas",
-        "El animal debe tener al menos una vacuna y no estar fallecido",
+        "El animal debe tener al menos una vacuna y no estar fallecido para pasar a 'Apto'",
         "warning"
       );
     }
@@ -102,19 +102,34 @@ export default function AltaAnimal() {
     return animal.nro || `${animal.raza}-${animal.fecha_ingreso}-${Math.random().toString(36).slice(2)}`;
   };
 
-  const getColorEstado = (estado: Estado) => {
-    if (estado.no_apto) return "table-danger";
-    if (estado.no_disponible) return "table-secondary";
-    if (estado.disponible) return "table-primary";
-    if (estado.apto) return "table-warning";
-    if (estado.adoptado) return "table-success";
-    return "";
+  // CORRECCIÓN 6: Función para asignar color a la fila
+  const getColorEstado = (estado: EstadoAnimal): string => {
+    switch (estado) {
+      case "No apto":
+        return "table-danger";
+      case "No disponible":
+        return "table-secondary";
+      case "Disponible":
+        return "table-primary";
+      case "Apto":
+        // Aquí puedes cambiar a un color menos confuso, quizás warning o info
+        return "table-warning"; 
+      case "Adoptado":
+        return "table-success";
+      case "En Adopción":
+        return "table-info"; // Nuevo estado para diferenciar de 'Disponible'
+      default:
+        return "";
+    }
   };
 
   return (
     <div className="container mt-5">
       <h2 className="mb-4 text-center">Listado de animales</h2>
-
+      
+      {/* CORRECCIÓN 7: Los valores del <option> deben coincidir exactamente 
+        con los valores reales que puede tener a.estado. 
+      */}
       <div className="mb-4 text-center">
         <label className="form-label me-2">Filtrar por estado:</label>
         <select
@@ -123,12 +138,12 @@ export default function AltaAnimal() {
           onChange={handleFiltroChange}
         >
           <option value="">Todos</option>
-          <option value="apto">Apto</option>
-          <option value="no_apto">No Apto</option>
-          <option value="en_adopcion">En Adopción</option>
-          <option value="adoptado">Adoptado</option>
-          <option value="disponible">Disponible</option>
-          <option value="no_disponible">No Disponible</option>
+          <option value="Apto">Apto</option> 
+          <option value="No apto">No Apto</option> 
+          <option value="En Adopción">En Adopción</option> 
+          <option value="Adoptado">Adoptado</option>
+          <option value="Disponible">Disponible</option>
+          <option value="No disponible">No Disponible</option>
         </select>
       </div>
 
@@ -145,18 +160,23 @@ export default function AltaAnimal() {
             </tr>
           </thead>
           <tbody>
+            {/* Iterar sobre los animales filtrados */}
             {filtrarAnimales().map((a) => (
               <tr
                 key={generarKey(a)}
-                className={getColorEstado(a.estado)}
-                onClick={() => handleSeleccionarAnimal(a)}
-                style={{ cursor: a.estado.no_apto ? "pointer" : "default" }}
+                // Pasar el string del estado para obtener la clase CSS
+                className={getColorEstado(a.estado)} 
+                // Al hacer clic, se llama a la función de selección con el pop-up
+                onClick={() => handleSeleccionarAnimal(a)} 
+                // Solo muestra el puntero si se puede interactuar (es 'No apto')
+                style={{ cursor: a.estado === "No apto" ? "pointer" : "default" }}
               >
                 <td>{a.nro || "-"}</td>
                 <td>{a.raza}</td>
                 <td>{a.edad_estimada}</td>
                 <td>{a.fecha_ingreso}</td>
-                <td>{Object.entries(a.estado).find(([, v]) => v)?.[0].replace("_", " ")}</td>
+                {/* Mostrar el estado directamente, ya que es un string */}
+                <td>{a.estado}</td> 
                 <td>{a.vacunas && a.vacunas.length > 0 ? "✅" : "❌"}</td>
               </tr>
             ))}
