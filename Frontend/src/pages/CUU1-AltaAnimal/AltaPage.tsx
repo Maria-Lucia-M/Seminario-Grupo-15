@@ -2,9 +2,8 @@ import { useEffect, useState, type ChangeEvent } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { API_URL } from "../../rutasGenericas"; // Asumiendo que esta importación es correcta
+import { API_URL } from "../../rutasGenericas";
 
-// Definición de tipos de estado válidos
 type EstadoAnimal = 
   | "Apto" 
   | "No apto" 
@@ -19,48 +18,95 @@ interface Animal {
   edad_estimada: string;
   fecha_ingreso: string;
   fecha_defuncion: string | null;
-  // CORRECCIÓN 1: La propiedad estado es ahora un string simple
   estado: EstadoAnimal; 
   imagen: string[];
   video: string[];
-  vacunas?: string[];
+}
+interface FichaMedica {
+  nro_ficha: number;
+  nro_animal: number; // Clave para relacionar con Animal
+  matricula: string;
+  nro_vacunas: number[]; // Array de números de vacuna aplicadas
+  observaciones?: string;
+  fecha: Date;
 }
 
 export default function AltaAnimal() {
   const [animales, setAnimales] = useState<Animal[]>([]);
-  // CORRECCIÓN 2: El filtro también debe ser un string que coincida con el valor del estado
+  const [fichasMedicas, setFichasMedicas] = useState<FichaMedica[]>([]);
   const [filtroEstado, setFiltroEstado] = useState<EstadoAnimal | "">("");
 
-  // Cargar animales desde el backend
+  // Cargar animales y fichas médicas al iniciar
   useEffect(() => {
-    const fetchAnimales = async () => {
+    const fetchDatos = async () => {
       try {
-        const { data } = await axios.get<Animal[]>(`${API_URL}/animales`);
-        setAnimales(data);
-      } catch {
-        Swal.fire("Error", "No se pudieron cargar los animales", "error");
+        // Asumiendo que el Nro de Animal es un string en el frontend pero un number en la ficha
+        const [animalesRes, fichasRes] = await Promise.all([
+            axios.get<Animal[]>(`${API_URL}/animales`),
+            axios.get<FichaMedica[]>(`${API_URL}/fichas_medicas`)
+        ]);
+        
+        setAnimales(animalesRes.data);
+        setFichasMedicas(fichasRes.data);
+
+      } catch (error) {
+        console.error("Error al cargar datos:", error);
+        Swal.fire("Error", "No se pudieron cargar los datos (Animales o Fichas Médicas)", "error");
       }
     };
-    fetchAnimales();
+    fetchDatos();
   }, []);
+  
+  // Verifica si el animal tiene vacunas registradas en alguna ficha médica
+  const tieneVacunasRegistradas = (animalNro: string): boolean => {
+    // Convertir el nro de animal a número para la comparación con la ficha
+    const animalId = parseInt(animalNro); 
+    
+    // Filtra las fichas de ese animal y verifica si alguna tiene vacunas
+    const fichasDelAnimal = fichasMedicas.filter(f => f.nro_animal === animalId);
+    return fichasDelAnimal.some(f => f.nro_vacunas && f.nro_vacunas.length > 0);
+  };
+  
+  // Asigna clase de color de Bootstrap según el estado
+  const getColorEstado = (estado: EstadoAnimal): string => {
+    switch (estado) {
+      case "No apto":
+        return "table-danger"; // Rojo
+      case "No disponible":
+        return "table-secondary"; // Gris
+      case "Disponible":
+        return "table-primary"; // Azul
+      case "Apto":
+        return "table-warning"; // Amarillo/Advertencia
+      case "Adoptado":
+        return "table-success"; // Verde
+      case "En Adopción":
+        return "table-info"; // Azul claro/Información
+      default:
+        return "";
+    }
+  };
 
+  const generarKey = (animal: Animal) => {
+    return animal.nro || `${animal.raza}-${animal.fecha_ingreso}-${Math.random().toString(36).slice(2)}`;
+  };
+
+  
   const handleFiltroChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    // CORRECCIÓN 3: Asegurar que el valor del select sea un estado válido o un string vacío
     setFiltroEstado(e.target.value as EstadoAnimal | "");
   };
 
-  // CORRECCIÓN 4: Lógica de filtrado simple usando el string del estado
   const filtrarAnimales = () => {
     if (!filtroEstado) return animales;
+    // Compara el valor del estado del animal con el valor del filtro seleccionado
     return animales.filter((a) => a.estado === filtroEstado);
   };
 
-  // CORRECCIÓN 5: Lógica de selección para el pop-up (lo cambiaste de "entrevista" a "adaptación")
   const handleSeleccionarAnimal = async (animal: Animal) => {
-    // El pop-up solo debe saltar si el estado actual es "No apto"
+    // El pop-up solo se dispara si el estado es "No apto"
     if (animal.estado !== "No apto") return; 
     
-    // Aquí es donde salta el pop-up de "período de adaptación"
+    // Pop-up: ¿Terminó su período de adaptación?
     const { isConfirmed } = await Swal.fire({
       title: "¿Terminó su período de adaptación?",
       icon: "question",
@@ -71,17 +117,20 @@ export default function AltaAnimal() {
 
     if (!isConfirmed) return;
 
-    const tieneVacunas = animal.vacunas && animal.vacunas.length > 0;
+    // Verificación de condiciones para pasar a "Apto"
+    const tieneVacunas = tieneVacunasRegistradas(animal.nro);
     const noFallecido = !animal.fecha_defuncion;
 
     if (tieneVacunas && noFallecido) {
       const actualizado: Animal = {
         ...animal,
-        estado: "Apto", // Cambia el estado a Apto si se cumplen las condiciones
+        estado: "Apto"
       };
 
       try {
         await axios.put(`${API_URL}/animales/${animal.nro}`, actualizado);
+        
+        // Actualiza el estado local del listado
         setAnimales((prev) =>
           prev.map((a) => (a.nro === animal.nro ? actualizado : a))
         );
@@ -92,44 +141,16 @@ export default function AltaAnimal() {
     } else {
       Swal.fire(
         "Condiciones no cumplidas",
-        "El animal debe tener al menos una vacuna y no estar fallecido para pasar a 'Apto'",
+        "El animal debe tener al menos una vacuna registrada y no estar fallecido para pasar a 'Apto'",
         "warning"
       );
-    }
-  };
-
-  const generarKey = (animal: Animal) => {
-    return animal.nro || `${animal.raza}-${animal.fecha_ingreso}-${Math.random().toString(36).slice(2)}`;
-  };
-
-  // CORRECCIÓN 6: Función para asignar color a la fila
-  const getColorEstado = (estado: EstadoAnimal): string => {
-    switch (estado) {
-      case "No apto":
-        return "table-danger";
-      case "No disponible":
-        return "table-secondary";
-      case "Disponible":
-        return "table-primary";
-      case "Apto":
-        // Aquí puedes cambiar a un color menos confuso, quizás warning o info
-        return "table-warning"; 
-      case "Adoptado":
-        return "table-success";
-      case "En Adopción":
-        return "table-info"; // Nuevo estado para diferenciar de 'Disponible'
-      default:
-        return "";
     }
   };
 
   return (
     <div className="container mt-5">
       <h2 className="mb-4 text-center">Listado de animales</h2>
-      
-      {/* CORRECCIÓN 7: Los valores del <option> deben coincidir exactamente 
-        con los valores reales que puede tener a.estado. 
-      */}
+
       <div className="mb-4 text-center">
         <label className="form-label me-2">Filtrar por estado:</label>
         <select
@@ -160,24 +181,23 @@ export default function AltaAnimal() {
             </tr>
           </thead>
           <tbody>
-            {/* Iterar sobre los animales filtrados */}
             {filtrarAnimales().map((a) => (
               <tr
                 key={generarKey(a)}
-                // Pasar el string del estado para obtener la clase CSS
+                // Asigna el color de la fila
                 className={getColorEstado(a.estado)} 
-                // Al hacer clic, se llama a la función de selección con el pop-up
+                // Dispara la verificación del pop-up y actualización
                 onClick={() => handleSeleccionarAnimal(a)} 
-                // Solo muestra el puntero si se puede interactuar (es 'No apto')
+                // Cambia el cursor para indicar interactividad solo si es "No apto"
                 style={{ cursor: a.estado === "No apto" ? "pointer" : "default" }}
               >
                 <td>{a.nro || "-"}</td>
                 <td>{a.raza}</td>
                 <td>{a.edad_estimada}</td>
                 <td>{a.fecha_ingreso}</td>
-                {/* Mostrar el estado directamente, ya que es un string */}
                 <td>{a.estado}</td> 
-                <td>{a.vacunas && a.vacunas.length > 0 ? "✅" : "❌"}</td>
+                {/* Muestra ✅ o ❌ basado en la ficha médica */}
+                <td>{tieneVacunasRegistradas(a.nro) ? "✅" : "❌"}</td> 
               </tr>
             ))}
           </tbody>
