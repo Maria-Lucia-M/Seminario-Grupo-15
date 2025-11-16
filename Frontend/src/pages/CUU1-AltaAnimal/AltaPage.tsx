@@ -43,7 +43,7 @@ export default function AltaAnimal() {
         // Asumiendo que el Nro de Animal es un string en el frontend pero un number en la ficha
         const [animalesRes, fichasRes] = await Promise.all([
             axios.get<Animal[]>(`${API_URL}/animales`),
-            axios.get<FichaMedica[]>(`${API_URL}/fichas_medicas`)
+            axios.get<FichaMedica[]>(`${API_URL}/fichasMed`)
         ]);
         
         setAnimales(animalesRes.data);
