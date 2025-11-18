@@ -1,9 +1,27 @@
 import { Router } from 'express';
-import { AdoptanteModel } from '../../CRUDS/Persona/adoptanteModel.js'; // ajustá el path
+import { AdoptanteModel } from '../../CRUDS/Persona/adoptanteModel.js';
 
+// Este router se monta en app.ts con: app.use('/api', ListaNegraRoutes);
 export const ListaNegraRoutes = Router();
 
-// ✅ GET: lista negra (solo los que tienen ListaNegra = true)
+/**
+ * GET /api/adoptantes
+ * Devuelve todos los adoptantes (sin filtrar por lista negra)
+ */
+ListaNegraRoutes.get('/adoptantes', async (req, res) => {
+    try {
+        const adoptantes = await AdoptanteModel.find();
+        res.json(adoptantes);
+    } catch (error) {
+        console.error('Error al obtener adoptantes:', error);
+        res.status(500).json({ message: 'Error al obtener los adoptantes' });
+    }
+});
+
+/**
+ * GET /api/adoptantes/lista-negra
+ * Devuelve solo los adoptantes que están marcados con ListaNegra = true
+ */
 ListaNegraRoutes.get('/adoptantes/lista-negra', async (req, res) => {
     try {
         const adoptantesEnListaNegra = await AdoptanteModel.find({ ListaNegra: true });
@@ -14,13 +32,14 @@ ListaNegraRoutes.get('/adoptantes/lista-negra', async (req, res) => {
     }
 });
 
-// ✅ PUT: cambiar valor de ListaNegra para un adoptante por _id
 ListaNegraRoutes.put('/adoptantes/:id/lista-negra', async (req, res) => {
     try {
         const { id } = req.params;
-        const { ListaNegra } = req.body; // 👈 importante que se llame igual que en el schema
+        const { ListaNegra } = req.body;
 
-        console.log('PUT /adoptantes/:id/lista-negra', { id, ListaNegra });
+        if (typeof ListaNegra !== 'boolean') {
+            return res.status(400).json({ message: 'ListaNegra debe ser boolean (true/false)' });
+        }
 
         const actualizado = await AdoptanteModel.findByIdAndUpdate(
             id,

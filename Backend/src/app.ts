@@ -12,7 +12,7 @@ import { rescatistaRoutes } from './CRUDS/Rescatista/rescatista.Routes.js';
 import { personaRouter } from './CRUDS/Persona/persona.Routes.js';
 import { entrevistaRoutes } from './CRUDS/Entrevista/entrevista.Routes.js';
 import { authRouter } from './auth/auth.routes.js';
-import { adoptantesEnListaNegra } from './CRUDS/Adoptante/adoptante.Routes.js';
+import { ListaNegraRoutes } from './CRUDS/Adoptante/adoptante.Routes.js';
 
 //Rutas del sistema:
 import { seguimientoRouter } from './application/CasosUso/Seguimiento/RegistrarSeguimiento.routes.js';
@@ -43,6 +43,6 @@ app.use('/api/personas', personaRouter);
 app.use('/api', AltaEntrevistaRoutes);
 app.use('/api', entrevistaRoutes);
 app.use('/api/auth', authRouter);
-app.use('/api', adoptantesEnListaNegra);
+app.use('/api', ListaNegraRoutes);
 
 export default app;

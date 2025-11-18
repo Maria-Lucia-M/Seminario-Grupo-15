@@ -2,6 +2,7 @@ import { SeguimientoDTO } from "../../DTOs/SeguimientoDTO.js";
 import { SeguimientoRepository } from "../../interfaces/SeguimientoRepository.js";
 import { SeguimientoModel } from "../../CasosUso/Seguimiento/Seguimiento.js";
 
+// Repositorio Mongo para Seguimiento
 export class SeguimientoRepositoryMongo implements SeguimientoRepository {
     async registrar(dto: SeguimientoDTO): Promise<SeguimientoDTO>{
         const seguimiento = new SeguimientoModel(dto);
