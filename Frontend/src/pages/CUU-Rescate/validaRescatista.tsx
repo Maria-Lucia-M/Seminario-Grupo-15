@@ -1,18 +1,26 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { API_URL } from "../../rutasGenericas";
+import { useRescatista } from "../../rescatista/useRescatista";
 import axios from "axios";
 import './formulario.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 
 export function ValidaRescatista() {
-  const [dni, setDni] = useState<number | "">("");
+  const [dni, setDni] = useState("");
   const navigate = useNavigate();
+  const {setRescatista}=useRescatista();
   const enviarFormulario = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
       const respuesta = await axios.get(`${API_URL}/rescatistas/${dni}`);
-      if (respuesta.data.exists) {
+      if (respuesta.data) {
+        setRescatista({
+          dni: respuesta.data.data.dni,
+          nombre: respuesta.data.data.nombre,
+          apellido: respuesta.data.data.apellido,
+          telefono: respuesta.data.data.telefono
+        });
         alert('Rescatista validado con exito!');
         navigate("/cuu/rescate")
       } else {
@@ -22,6 +30,7 @@ export function ValidaRescatista() {
       console.error('Error validando rescatista:', error);
       alert('Error validando rescatista...');
     }
+    
   };
 
   return (
@@ -30,7 +39,7 @@ export function ValidaRescatista() {
       <form className="formulario-form" onSubmit={enviarFormulario}>
         <div className="form-row">
           <label>DNI</label>
-          <input type="number" value={dni} onChange={e => setDni(e.target.value === "" ? "" : Number(e.target.value))} required/>
+          <input type="text" value={dni} onChange={e => setDni(e.target.value)}/>
         </div>
         <div className="mt-3 text-center">
           <p className="text-muted">

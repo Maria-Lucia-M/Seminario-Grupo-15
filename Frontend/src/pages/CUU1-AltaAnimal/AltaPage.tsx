@@ -4,14 +4,13 @@ import Swal from "sweetalert2";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { API_URL } from "../../rutasGenericas";
 
-interface Estado {
-  apto: boolean;
-  no_apto: boolean;
-  en_adopcion: boolean;
-  adoptado: boolean;
-  disponible: boolean;
-  no_disponible: boolean;
-}
+type EstadoAnimal = 
+  | "Apto" 
+  | "No apto" 
+  | "Disponible" 
+  | "No disponible" 
+  | "Adoptado" 
+  | "En Adopción";
 
 interface Animal {
   nro: string;
@@ -19,41 +18,95 @@ interface Animal {
   edad_estimada: string;
   fecha_ingreso: string;
   fecha_defuncion: string | null;
-  estado: Estado;
+  estado: EstadoAnimal; 
   imagen: string[];
   video: string[];
-  vacunas?: string[];
+}
+interface FichaMedica {
+  nro_ficha: number;
+  nro_animal: number; // Clave para relacionar con Animal
+  matricula: string;
+  nro_vacunas: number[]; // Array de números de vacuna aplicadas
+  observaciones?: string;
+  fecha: Date;
 }
 
 export default function AltaAnimal() {
   const [animales, setAnimales] = useState<Animal[]>([]);
-  const [filtroEstado, setFiltroEstado] = useState<string>("");
+  const [fichasMedicas, setFichasMedicas] = useState<FichaMedica[]>([]);
+  const [filtroEstado, setFiltroEstado] = useState<EstadoAnimal | "">("");
 
-  // Cargar animales desde el backend
+  // Cargar animales y fichas médicas al iniciar
   useEffect(() => {
-    const fetchAnimales = async () => {
+    const fetchDatos = async () => {
       try {
-        const { data } = await axios.get(`${API_URL}/animales`);
-        setAnimales(data);
-      } catch {
-        Swal.fire("Error", "No se pudieron cargar los animales", "error");
+        // Asumiendo que el Nro de Animal es un string en el frontend pero un number en la ficha
+        const [animalesRes, fichasRes] = await Promise.all([
+            axios.get<Animal[]>(`${API_URL}/animales`),
+            axios.get<FichaMedica[]>(`${API_URL}/fichasMed`)
+        ]);
+        
+        setAnimales(animalesRes.data);
+        setFichasMedicas(fichasRes.data);
+
+      } catch (error) {
+        console.error("Error al cargar datos:", error);
+        Swal.fire("Error", "No se pudieron cargar los datos (Animales o Fichas Médicas)", "error");
       }
     };
-    fetchAnimales();
+    fetchDatos();
   }, []);
+  
+  // Verifica si el animal tiene vacunas registradas en alguna ficha médica
+  const tieneVacunasRegistradas = (animalNro: string): boolean => {
+    // Convertir el nro de animal a número para la comparación con la ficha
+    const animalId = parseInt(animalNro); 
+    
+    // Filtra las fichas de ese animal y verifica si alguna tiene vacunas
+    const fichasDelAnimal = fichasMedicas.filter(f => f.nro_animal === animalId);
+    return fichasDelAnimal.some(f => f.nro_vacunas && f.nro_vacunas.length > 0);
+  };
+  
+  // Asigna clase de color de Bootstrap según el estado
+  const getColorEstado = (estado: EstadoAnimal): string => {
+    switch (estado) {
+      case "No apto":
+        return "table-danger"; // Rojo
+      case "No disponible":
+        return "table-secondary"; // Gris
+      case "Disponible":
+        return "table-primary"; // Azul
+      case "Apto":
+        return "table-warning"; // Amarillo/Advertencia
+      case "Adoptado":
+        return "table-success"; // Verde
+      case "En Adopción":
+        return "table-info"; // Azul claro/Información
+      default:
+        return "";
+    }
+  };
 
+  const generarKey = (animal: Animal) => {
+    return animal.nro || `${animal.raza}-${animal.fecha_ingreso}-${Math.random().toString(36).slice(2)}`;
+  };
+
+  
   const handleFiltroChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setFiltroEstado(e.target.value);
+    setFiltroEstado(e.target.value as EstadoAnimal | "");
   };
 
   const filtrarAnimales = () => {
     if (!filtroEstado) return animales;
-    return animales.filter((a) => a.estado[filtroEstado as keyof Estado]);
+    // Compara el valor del estado del animal con el valor del filtro seleccionado
+    return animales.filter((a) => a.estado === filtroEstado);
   };
 
   const handleSeleccionarAnimal = async (animal: Animal) => {
-    if (!animal.estado.no_apto) return;
-
+    // El pop-up solo se dispara si el estado es "No apto"
+    if (animal.estado !== "No apto") return; 
+    
+    // Pop-up: ¿Terminó su período de adaptación?
     const { isConfirmed } = await Swal.fire({
       title: "¿Terminó su período de adaptación?",
       icon: "question",
@@ -64,24 +117,20 @@ export default function AltaAnimal() {
 
     if (!isConfirmed) return;
 
-    const tieneVacunas = animal.vacunas && animal.vacunas.length > 0;
+    // Verificación de condiciones para pasar a "Apto"
+    const tieneVacunas = tieneVacunasRegistradas(animal.nro);
     const noFallecido = !animal.fecha_defuncion;
 
     if (tieneVacunas && noFallecido) {
       const actualizado: Animal = {
         ...animal,
-        estado: {
-          apto: true,
-          no_apto: false,
-          en_adopcion: false,
-          adoptado: false,
-          disponible: false,
-          no_disponible: false,
-        },
+        estado: "Apto"
       };
 
       try {
         await axios.put(`${API_URL}/animales/${animal.nro}`, actualizado);
+        
+        // Actualiza el estado local del listado
         setAnimales((prev) =>
           prev.map((a) => (a.nro === animal.nro ? actualizado : a))
         );
@@ -92,23 +141,10 @@ export default function AltaAnimal() {
     } else {
       Swal.fire(
         "Condiciones no cumplidas",
-        "El animal debe tener al menos una vacuna y no estar fallecido",
+        "El animal debe tener al menos una vacuna registrada y no estar fallecido para pasar a 'Apto'",
         "warning"
       );
     }
-  };
-
-  const generarKey = (animal: Animal) => {
-    return animal.nro || `${animal.raza}-${animal.fecha_ingreso}-${Math.random().toString(36).slice(2)}`;
-  };
-
-  const getColorEstado = (estado: Estado) => {
-    if (estado.no_apto) return "table-danger";
-    if (estado.no_disponible) return "table-secondary";
-    if (estado.disponible) return "table-primary";
-    if (estado.apto) return "table-warning";
-    if (estado.adoptado) return "table-success";
-    return "";
   };
 
   return (
@@ -123,12 +159,12 @@ export default function AltaAnimal() {
           onChange={handleFiltroChange}
         >
           <option value="">Todos</option>
-          <option value="apto">Apto</option>
-          <option value="no_apto">No Apto</option>
-          <option value="en_adopcion">En Adopción</option>
-          <option value="adoptado">Adoptado</option>
-          <option value="disponible">Disponible</option>
-          <option value="no_disponible">No Disponible</option>
+          <option value="Apto">Apto</option> 
+          <option value="No apto">No Apto</option> 
+          <option value="En Adopción">En Adopción</option> 
+          <option value="Adoptado">Adoptado</option>
+          <option value="Disponible">Disponible</option>
+          <option value="No disponible">No Disponible</option>
         </select>
       </div>
 
@@ -148,16 +184,20 @@ export default function AltaAnimal() {
             {filtrarAnimales().map((a) => (
               <tr
                 key={generarKey(a)}
-                className={getColorEstado(a.estado)}
-                onClick={() => handleSeleccionarAnimal(a)}
-                style={{ cursor: a.estado.no_apto ? "pointer" : "default" }}
+                // Asigna el color de la fila
+                className={getColorEstado(a.estado)} 
+                // Dispara la verificación del pop-up y actualización
+                onClick={() => handleSeleccionarAnimal(a)} 
+                // Cambia el cursor para indicar interactividad solo si es "No apto"
+                style={{ cursor: a.estado === "No apto" ? "pointer" : "default" }}
               >
                 <td>{a.nro || "-"}</td>
                 <td>{a.raza}</td>
                 <td>{a.edad_estimada}</td>
                 <td>{a.fecha_ingreso}</td>
-                <td>{Object.entries(a.estado).find(([, v]) => v)?.[0].replace("_", " ")}</td>
-                <td>{a.vacunas && a.vacunas.length > 0 ? "✅" : "❌"}</td>
+                <td>{a.estado}</td> 
+                {/* Muestra ✅ o ❌ basado en la ficha médica */}
+                <td>{tieneVacunasRegistradas(a.nro) ? "✅" : "❌"}</td> 
               </tr>
             ))}
           </tbody>

@@ -20,11 +20,7 @@ export const findAllRescatista = async (req: Request, res: Response): Promise<vo
 
 export const getOneRescatista = async (req: Request, res: Response): Promise<void> => {
     try{
-        const nro = parseInt(req.params.dni, 10);
-        if (isNaN(nro)) {
-            res.status(400).json({ message: 'DNI de rescatista inválido' });
-            return;
-        };
+        const nro = req.params.dni;
         const rescatista =  await new RescatistaRepositoryMongo().buscarPorNro(nro);
         if (!rescatista) {
             res.status(404).json({ message: 'Rescatista no encontrado' });
@@ -61,19 +57,15 @@ export const registrarRescatistaController = async (req: Request, res: Response)
 
 export const actualizarRescatista = async (req: Request, res: Response): Promise<void> => {
     try {
-        const nro = parseInt(req.params.dni, 10);
-        if (isNaN(nro)) {
-            res.status(400).json({ message: 'Número de rescatista inválido' });
-            return;
-        };
+        const dni = req.params.dni;
         const repo = new RescatistaRepositoryMongo();
-        const existente = await repo.buscarPorNro(nro);
+        const existente = await repo.buscarPorNro(dni);
         if (!existente) {
             res.status(404).json({ message: 'Rescatista no encontrado' });
             return;
         };
 
-        const actualizado = await repo.update(nro, req.body);
+        const actualizado = await repo.update(dni, req.body);
         if(actualizado === null){
             res.status(404).json({ message: 'No se pudo actualizar el rescatista' });
             return;
@@ -89,19 +81,15 @@ export const actualizarRescatista = async (req: Request, res: Response): Promise
 
 export const eliminarRescatista = async (req: Request, res: Response): Promise<void> => {
     try{
-        const nro = parseInt(req.params.dni, 10);
-        if (isNaN(nro)) {
-            res.status(400).json({ message: 'Número de rescatista inválido' });
-            return;
-        };
+        const dni = req.params.dni;
         const repo = new RescatistaRepositoryMongo();
-        const existente = await repo.buscarPorNro(nro);
+        const existente = await repo.buscarPorNro(dni);
         if (!existente) {
             res.status(404).json({ message: 'Rescatista no encontrado' });
             return;
         };
 
-        const eliminado = await repo.delete(nro);
+        const eliminado = await repo.delete(dni);
         if (!eliminado) {
             res.status(404).json({ message: 'No se pudo eliminar el rescatista' });
             return;
