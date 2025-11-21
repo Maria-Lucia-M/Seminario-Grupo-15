@@ -11,7 +11,8 @@ import AltaAnimal from './pages/CUU1-AltaAnimal/AltaPage.tsx';
 import { ValidaRescatista } from './pages/CUU-Rescate/validaRescatista.tsx';
 import { IngresoRescatista } from './pages/CUU-Rescate/ingresoRescatista.tsx';
 import { RegistrarRescate } from './pages/CUU-Rescate/registrarRescate.tsx';
-import { CargaProvisoriaAnimal } from './pages/CUU-Rescate/cargaProvisoriaAnimal.tsx';
+import PanelAdmin from './pages/Administrador/panelAdmin.tsx';
+import { PrivateRoute } from './pages/Administrador/PrivateRoutes.tsx';
 
 function App() {
   return (
@@ -29,12 +30,20 @@ function App() {
       <Route path="/cuu/valida-rescatista" element={<ValidaRescatista />} />
       <Route path="/cuu/ingreso-rescatista" element={<IngresoRescatista />} />
       <Route path="/cuu/rescate" element={<RegistrarRescate />} />
-      <Route path="/cuu/CargaProvisoriaAnimal" element={<CargaProvisoriaAnimal />} />
       <Route path="/cuu/colocacion-vacunas" element={<ColocacionVacunas />} />
       <Route path="/cuu/alta-entrevista" element={<AltaEntrevistaPage />} />
       <Route path="/cuu/listar-entrevistas" element={<EntrevistaListPage />} />
       <Route path="/cuu/registro-animal" element={<AltaAnimal />} />
 
+      {/* Solo administrador */}
+      <Route
+        path="/admin/panel"
+        element={
+          <PrivateRoute allowedRoles={["Administrador"]}>
+            <PanelAdmin />
+          </PrivateRoute>
+        }
+      />
     </Routes>
   );
 }
