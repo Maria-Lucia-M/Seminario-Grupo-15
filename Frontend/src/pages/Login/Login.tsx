@@ -1,12 +1,11 @@
 import React from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate, useLocation } from 'react-router-dom';
 import { useState } from 'react';
 import { useAuth } from '../../auth/useAuth.ts';
 import { API_URL } from '../../auth/constants.ts';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
 import axios from "axios";
-import { getRutaInicioPorRol } from '../../components/GetRutaInicioPorRol.ts';
 
 export default function Login() {
 
@@ -15,8 +14,12 @@ export default function Login() {
     const [error, setError] = useState<string | null>(null);
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
+    const location = useLocation();
 
     const auth = useAuth();
+
+    const params = new URLSearchParams(location.search);
+    const force = params.get('force') === 'true';
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -26,7 +29,6 @@ export default function Login() {
         try {
             const response = await axios.post(`${API_URL}/auth/login`, { email, password });
             const data = response.data
-            //console.log('Datos de respuesta con axios:', data);
 
             // Guardar tokens y autenticar usuario
             auth.login(
@@ -43,7 +45,7 @@ export default function Login() {
             );
 
             console.log(`[Login] Usuario ${data.user.email} autenticado como ${data.user.rol}`);
-            const destino = getRutaInicioPorRol(data.user.rol);
+            const destino = '/administrador/home';
             navigate(destino, { replace: true });
 
         } catch (error) {
@@ -53,28 +55,27 @@ export default function Login() {
                 if (status === 401) {
                     setError('Credenciales inválidas. Por favor, verifica tu correo y contraseña.');
                     return;
-                }else if (status === 403) {
+                } else if (status === 403) {
                     setError('Tu cuenta no está verificada. Por favor, verifica tu correo.');
                     return;
                 } else if (status === 429){
                     setError('Demasiados intentos fallidos. Por favor, intenta nuevamente más tarde.');
                     return;
-                }else {
+                } else {
                     setError('Error en el servidor. Por favor, intenta nuevamente más tarde.');
                     console.error('Error en login - status:', status);
                     return;
-                };
+                }
             }
         } finally {
             setIsLoading(false);
         }
     };
 
-    if (auth.isAuthenticated) {
+    if (auth.isAuthenticated && !force) {
         console.log("Auth state:", auth.isAuthenticated, auth.user);
-        const destino = getRutaInicioPorRol(auth.user?.rol || '');
-        return <Navigate to={destino} replace />;
-    };
+        return <Navigate to="/administrador/home" replace />;
+    }
 
     return (
             <div className="container d-flex justify-content-center align-items-center min-vh-100">
@@ -150,4 +151,4 @@ export default function Login() {
                 </div>
             </div>
     );
-};
+}

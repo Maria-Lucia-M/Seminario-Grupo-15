@@ -14,6 +14,9 @@ import { RegistrarRescate } from './pages/CUU-Rescate/registrarRescate.tsx';
 import { CargaProvisoriaAnimal } from './pages/CUU-Rescate/cargaProvisoriaAnimal.tsx';
 import ListadoAnimales from './pages/Adoptar/ListadoAnimales';
 import DetalleAnimal from './pages/Adoptar/DetalleAnimal';
+import Home from './components/Home';
+import ListaNegra from './pages/CUU3-ListaNegra/ListaNegra';
+
 
 function App() {
   return (
@@ -28,6 +31,12 @@ function App() {
       {/* Home previas conservadas por compatibilidad */}
       <Route path="/trabajadores/homePage" element={<HomePage />} />
       <Route path="/adoptantes/homeAdoptante" element={<HomeAdoptante />} />
+
+      {/* Ruta que muestra el Home con CRUDs (destino del login) */}
+      <Route path="/administrador/home" element={<Home />} />
+
+      {/* Lista Negra */}
+      <Route path="/cuu/lista-negra" element={<ListaNegra />} />
 
       {/* Público */}
       <Route path="/adoptar" element={<ListadoAnimales />} />

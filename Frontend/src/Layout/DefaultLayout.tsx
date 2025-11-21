@@ -114,7 +114,7 @@ const DefaultLayout: React.FC<React.PropsWithChildren> = React.memo(({ children 
                                 <div className="d-lg-none mt-3 w-100 text-center">
                                     <Link
                                         className="btn btn-sm"
-                                        to="/login"
+                                        to="/login?force=true"
                                         style={{
                                             backgroundColor: SARA_COLORS.blueDark,
                                             color: "#FFFFFF",
@@ -130,7 +130,7 @@ const DefaultLayout: React.FC<React.PropsWithChildren> = React.memo(({ children 
                                 {/* Desktop: solo ícono de usuario */}
                                 <div className="d-none d-lg-flex">
                                     <Link
-                                        to="/login"
+                                        to="/login?force=true"
                                         title="Iniciar sesión"
                                         style={{
                                             color: SARA_COLORS.blueDark,

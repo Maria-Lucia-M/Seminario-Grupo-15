@@ -10,7 +10,7 @@ interface Persona {
     nombre: string;
     apellido: string;
     mail: string;
-    contraseña: string;
+    contrasena: string;
     telefono: string;
 }
 
@@ -94,9 +94,89 @@ export default function ListaNegra() {
         }
     };
 
+    // Nueva función: agregar por DNI o por _id
+    const handleAgregarPorInput = async () => {
+        const { value: inputValue } = await Swal.fire({
+            title: 'Agregar persona a Lista Negra',
+            input: 'text',
+            inputLabel: 'Ingrese DNI o _id del adoptante',
+            inputPlaceholder: 'Ej: 12345678 o 64a1f2a3b4c5d6e7f8g9h0',
+            showCancelButton: true,
+            inputValidator: (value) => {
+                if (!value || value.trim().length === 0) {
+                    return 'Ingresá DNI o _id válido';
+                }
+                return null;
+            }
+        });
+
+        if (!inputValue) return;
+        const query = inputValue.trim();
+
+        try {
+            // Intento buscar por DNI primero
+            let adoptante: Adoptante | null = null;
+
+            try {
+                const resByDni = await axios.get<Adoptante[]>(`${API_URL}/adoptantes?dni=${encodeURIComponent(query)}`);
+                if (resByDni.data && resByDni.data.length > 0) {
+                    adoptante = resByDni.data[0];
+                }
+            } catch {
+                // no encontrado por dni, lo ignoramos y probamos por id
+            }
+
+            // Si no encontré por DNI, pruebo por ID
+            if (!adoptante) {
+                try {
+                    const resById = await axios.get<Adoptante>(`${API_URL}/adoptantes/${encodeURIComponent(query)}`);
+                    if (resById.data) adoptante = resById.data;
+                } catch {
+                    // no encontrado por id
+                }
+            }
+
+            if (!adoptante) {
+                Swal.fire('No encontrado', 'No se encontró un adoptante con ese DNI ni ID.', 'warning');
+                return;
+            }
+
+            // Confirmar acción
+            const { isConfirmed } = await Swal.fire({
+                title: 'Confirmar agregado',
+                html: `Agregar a <strong>${adoptante.nombre} ${adoptante.apellido}</strong> (DNI: ${adoptante.dni}) a la Lista Negra?`,
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Sí, agregar',
+                cancelButtonText: 'Cancelar'
+            });
+
+            if (!isConfirmed) return;
+
+            // Ejecutar PUT para marcar ListaNegra = true
+            await axios.put(`${API_URL}/adoptantes/${adoptante._id}/lista-negra`, { ListaNegra: true });
+            Swal.fire('Éxito', 'La persona fue agregada a la Lista Negra', 'success');
+            cargarAdoptantes();
+
+        } catch (error: any) {
+            console.error('Error agregando a lista negra:', error?.response || error);
+            Swal.fire('Error', error?.response?.data?.message || 'No se pudo agregar la persona', 'error');
+        }
+    }
+
     return (
         <div className="container mt-5">
-            <h2 className="mb-4 text-center">Personas en Lista Negra</h2>
+            <div className="d-flex justify-content-between align-items-center mb-4">
+                <h2>Personas en Lista Negra</h2>
+                <div>
+                    <button className="btn btn-danger me-2" onClick={() => cargarAdoptantes()}>
+                        Recargar
+                    </button>
+                    <button className="btn btn-success" onClick={handleAgregarPorInput}>
+                        Agregar persona
+                    </button>
+                </div>
+            </div>
 
             {loading && <p className="text-center">Cargando...</p>}
 
